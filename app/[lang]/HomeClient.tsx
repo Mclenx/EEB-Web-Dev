@@ -349,7 +349,7 @@ export default function HomeClient({
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 font-sans">
       {/* Navbar */}
-      <header className="sticky top-0 z-50 bg-white/80 border-b border-slate-200 backdrop-blur dark:bg-slate-950/70 dark:border-slate-800">
+      <header className="sticky top-0 z-50 bg-white/80 border-b border-slate-200 backdrop-blur dark:bg-slate-950/70 dark:border-slate-800 shadow-sm">
         <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Link
@@ -591,7 +591,7 @@ export default function HomeClient({
         </section>
 
         {/* Work (kept as-is for now) */}
-        <section id="work" className="space-y-8">
+        <section id="work" className="space-y-8 scroll-mt-28">
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
               {t.work.title}
