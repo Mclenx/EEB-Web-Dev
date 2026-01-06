@@ -357,7 +357,8 @@ export default function HomeClient({
               className="flex items-center gap-2 focus:outline-none"
               aria-label="Back to top"
             >
-              <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-emerald-400 via-sky-400 to-indigo-500" />
+                {/*Logo placeholder*/}
+              <div className="h-9 w-9 min-h-9 min-w-9 shrink-0 rounded-full bg-gradient-to-tr from-emerald-400 via-sky-400 to-indigo-500" />
               <span className="text-sm uppercase tracking-[0.35em] text-slate-700 dark:text-slate-200">
                 EEB Web Dev
               </span>
