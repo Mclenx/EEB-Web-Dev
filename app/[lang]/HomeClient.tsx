@@ -603,7 +603,7 @@ export default function HomeClient({
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {/* OTA */}
             <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
-              <div className="relative aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-slate-200 via-slate-400 to-slate-200/0 dark:from-slate-900 dark:via-slate-700 dark:to-slate-900/0">
+              <div className="relative h-40 sm:aspect-video sm:h-auto aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-slate-200 via-slate-400 to-slate-200/0 dark:from-slate-900 dark:via-slate-700 dark:to-slate-900/0">
                 <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700 backdrop-blur dark:text-emerald-200">
                   <span aria-hidden>⏳</span>
                   <span>{t.work.ota.badge}</span>
@@ -631,7 +631,7 @@ export default function HomeClient({
 
             {/* Lead Gen */}
             <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
-              <div className="aspect-video overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
+              <div className="aspect-video h-40 sm:aspect-video sm:h-auto overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
                 <LeadGenFlow t={t} />
               </div>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
@@ -650,15 +650,17 @@ export default function HomeClient({
 
             {/* Scoring Concept */}
             <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
-              <div className="relative aspect-video rounded-xl bg-slate-200/60 dark:bg-slate-800/30 pt-10">
-                <div className="absolute left-3 top-3 right-3 text-[0.65rem] uppercase tracking-[0.18em] leading-[1.35] text-slate-500 dark:text-slate-400">
+              <div className="relative h-40 sm:aspect-video sm:h-auto rounded-xl bg-slate-200/60 dark:bg-slate-800/30 overflow-hidden">
+                <div className="absolute left-3 top-3 text-[0.65rem] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                   {t.work.scoring.label}
                 </div>
+
                 <ScoreLoop
                   label={t.work.scoring.loopLabel}
                   caption={t.work.scoring.loopCaption}
                 />
               </div>
+
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                 {t.work.scoring.title}
               </h3>
@@ -684,7 +686,7 @@ export default function HomeClient({
                 }
                 className="flex flex-col gap-4 text-left group"
               >
-                <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
+                <div className="relative h-40 sm:aspect-video sm:h-auto aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
                   <Image
                     src="/work/cryoair-homepage.png"
                     alt="Cryo-Air homepage screenshot"
