@@ -357,7 +357,7 @@ export default function HomeClient({
               className="flex items-center gap-2 focus:outline-none"
               aria-label="Back to top"
             >
-                {/*Logo placeholder*/}
+              {/*Logo placeholder*/}
               <div className="h-9 w-9 min-h-9 min-w-9 shrink-0 rounded-full bg-gradient-to-tr from-emerald-400 via-sky-400 to-indigo-500" />
               <span className="text-sm uppercase tracking-[0.35em] text-slate-700 dark:text-slate-200">
                 EEB Web Dev
@@ -591,7 +591,7 @@ export default function HomeClient({
         </section>
 
         {/* Work (kept as-is for now) */}
-        <section id="work" className="space-y-8 scroll-mt-28">
+        <section id="work" className="space-y-8 scroll-mt-32">
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
               {t.work.title}
@@ -652,10 +652,6 @@ export default function HomeClient({
             {/* Scoring Concept */}
             <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
               <div className="relative h-40 sm:aspect-video sm:h-auto rounded-xl bg-slate-200/60 dark:bg-slate-800/30 overflow-hidden">
-                <div className="absolute left-3 top-3 text-[0.65rem] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                  {t.work.scoring.label}
-                </div>
-
                 <ScoreLoop
                   label={t.work.scoring.loopLabel}
                   caption={t.work.scoring.loopCaption}
