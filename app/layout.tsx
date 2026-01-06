@@ -30,5 +30,12 @@ export default function RootLayout({
   );
 }
 
+// app/layout.tsx
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+
 
 

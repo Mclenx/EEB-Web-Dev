@@ -347,7 +347,7 @@ export default function HomeClient({
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 font-sans">
+    <div className="min-h-screen overflow-x-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 font-sans">
       {/* Navbar */}
       <header className="sticky top-0 z-50 bg-white/80 border-b border-slate-200 backdrop-blur dark:bg-slate-950/70 dark:border-slate-800">
         <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between gap-4">
