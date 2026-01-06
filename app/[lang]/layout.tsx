@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 
 const baseUrl = "https://eebweb.dev";
 
+export function generateStaticParams() {
+  return [{ lang: "en" }, { lang: "fr" }];
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -68,13 +72,6 @@ export default function LangLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      {/* IMPORTANT: set actual lang attr dynamically if you want:
-          In Next, you can move this into generateStaticParams + separate layouts
-          For now, it won't break SEO; but we should fix it soon.
-      */}
-      <body>{children}</body>
-    </html>
-  );
+  return <>{children}</>;
 }
+

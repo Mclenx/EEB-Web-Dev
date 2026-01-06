@@ -6,7 +6,11 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "EEB Web Dev",
+  metadataBase: new URL("https://eebweb.dev"),
+  title: {
+    default:"EEB Web Dev",
+    template:"%s",
+  },
   description: "Portfolio site for Eric (EEB Web Dev).",
   icons: {
     icon: [
