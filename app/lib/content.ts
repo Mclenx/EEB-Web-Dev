@@ -200,7 +200,7 @@ export const content = {
         "What kind of site do you need? (new site, redesign, bilingual, SEO...)",
       send: "Send message",
       note: "Simple one-page websites are available for businesses that need to get online quickly.",
-      availability: "EN / FR disponible",
+      availability: "EN / FR available",
       sending: "Sending…",
       sent: "Sent — I’ll reply soon.",
       errorFallback: "Something went wrong — please try again later.",
