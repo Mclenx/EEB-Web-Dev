@@ -40,7 +40,7 @@ export async function generateMetadata({
       },
     },
 
-    // OG basics (we’ll add the OG image next)
+    // OG basics 
     openGraph: {
       title,
       description,

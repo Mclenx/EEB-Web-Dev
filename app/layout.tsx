@@ -18,6 +18,9 @@ export const metadata: Metadata = {
       { url: "/favicon-32 - 1.png", sizes: "32x32", type: "image/png" },
     ],
   },
+  other:{
+    google:"notranslate",
+  },
 };
 
 export default function RootLayout({
