@@ -336,6 +336,7 @@ export default function HomeClient({
       setFormState({ status: "sent", message: t.contact.sent });
       setTimeout(() => setFormState({ status: "idle" }), 4000);
       form.reset();
+      (document.activeElement as HTMLElement | null)?.blur();
     } catch (err) {
       const msg =
         err instanceof Error && err.message
