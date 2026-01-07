@@ -139,8 +139,6 @@ export const content = {
         title: "Cryo-Air HVAC — Shopify Website",
         desc: "Shopify storefront for an HVAC repair business so clients can order air filters online instead of calling during service hours.",
         meta: "Theme customization, product catalogue setup, services structure.",
-        footerShow: "View project overview",
-        footerHide: "Hide details",
         caseTitle: "Cryo-Air HVAC — Project Overview",
         p1: "Cryo-Air is a Montréal HVAC repair service owned by Andrew, a technician I’ve relied on personally for emergency heating issues. He needed a website that allowed customers to buy air filters online so he could reduce manual orders and focus on service calls.",
         p2: "We chose Shopify to keep things simple and low-maintenance. I worked within the constraints of the theme system, customized the layout, created product options, and organized the content. Much of the project timeline was determined by slow content delivery, but I kept the structure moving and ensured the final setup was clean and functional.",
@@ -161,8 +159,8 @@ export const content = {
           "Since shipping this Shopify build, my design and UX skills have improved a lot. If I were rebuilding Cryo-Air today, I’d create a more custom layout with clearer service storytelling, stronger visuals, and a faster, more focused booking flow.",
         approachNote:
           "I’m currently sketching a modern concept redesign for this project that reflects my current design standards. Once it’s ready, I’ll link the live demo here.",
-        visit: "Visit live site →",
-        close: "Close overview",
+        viewOverview: "View project overview",
+        hideDetails: "Hide details",
       },
     },
 
@@ -344,8 +342,6 @@ export const content = {
         title: "Cryo-Air HVAC — Site Shopify",
         desc: "Boutique Shopify pour une entreprise HVAC afin que les clients puissent commander des filtres en ligne au lieu d’appeler pendant les heures de service.",
         meta: "Personnalisation du thème, catalogue produits, structure des services.",
-        footerShow: "Voir le résumé du projet",
-        footerHide: "Masquer les détails",
         caseTitle: "Cryo-Air HVAC — Résumé du projet",
         p1: "Cryo-Air est un service HVAC à Montréal, géré par Andrew, un technicien sur qui j’ai déjà compté lors d’urgences de chauffage. Il avait besoin d’un site permettant aux clients d’acheter des filtres en ligne afin de réduire les commandes manuelles et se concentrer sur les appels de service.",
         p2: "Nous avons choisi Shopify pour garder l’entretien simple. J’ai travaillé dans les limites du système de thèmes, ajusté la mise en page, créé des options produits et organisé le contenu. Une partie du délai dépendait du contenu, mais j’ai maintenu l’avancement et livré une configuration propre et fonctionnelle.",
@@ -366,8 +362,8 @@ export const content = {
           "Depuis ce projet, mes compétences en design et UX ont beaucoup progressé. Si je reconstruisais Cryo-Air aujourd’hui, je ferais une mise en page plus sur mesure, avec une histoire de services plus claire, de meilleurs visuels et un parcours de prise de contact plus direct.",
         approachNote:
           "Je prépare actuellement un concept redesign moderne qui reflète mon niveau actuel. Quand il sera prêt, je l’ajouterai ici.",
-        visit: "Voir le site →",
-        close: "Fermer",
+        viewOverview: "Voir l’aperçu du projet",
+        hideDetails: "Masquer les détails",
       },
     },
 

@@ -707,8 +707,8 @@ export default function HomeClient({
                   Shopify / Liquid <span aria-hidden>•</span>{" "}
                   <span className="underline decoration-dotted">
                     {activeCaseStudy === "cryoair"
-                      ? "Hide details"
-                      : "View project overview"}
+                      ? t.work.cryoair.hideDetails
+                      : t.work.cryoair.viewOverview}
                   </span>
                 </span>
               </button>
