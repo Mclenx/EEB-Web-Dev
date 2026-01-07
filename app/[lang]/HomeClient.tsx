@@ -918,7 +918,7 @@ export default function HomeClient({
               name="name"
               required
               autoComplete="name"
-              className="text-base rounded-lg bg-white border border-slate-300 px-4 py-2 text-sm outline-none focus:border-emerald-400 dark:bg-slate-900/40 dark:border-slate-700"
+              className="text-base sm:text-sm rounded-lg bg-white border border-slate-300 px-4 py-2 text-sm outline-none focus:border-emerald-400 dark:bg-slate-900/40 dark:border-slate-700"
               placeholder={t.contact.name}
             />
             <input
@@ -926,13 +926,13 @@ export default function HomeClient({
               type="email"
               required
               autoComplete="email"
-              className="text-base rounded-lg bg-white border border-slate-300 px-4 py-2 text-sm outline-none focus:border-emerald-400 dark:bg-slate-900/40 dark:border-slate-700"
+              className="text-base sm:text-sm rounded-lg bg-white border border-slate-300 px-4 py-2 text-sm outline-none focus:border-emerald-400 dark:bg-slate-900/40 dark:border-slate-700"
               placeholder={t.contact.email}
             />
             <textarea
               name="message"
               required
-              className="text-base rounded-lg bg-white border border-slate-300 px-4 py-2 text-sm outline-none focus:border-emerald-400 min-h-[140px] dark:bg-slate-900/40 dark:border-slate-700"
+              className="text-base sm:text-sm rounded-lg bg-white border border-slate-300 px-4 py-2 text-sm outline-none focus:border-emerald-400 min-h-[140px] dark:bg-slate-900/40 dark:border-slate-700"
               placeholder={t.contact.message}
             />
             <button
