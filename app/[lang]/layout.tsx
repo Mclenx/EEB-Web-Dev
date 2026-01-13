@@ -12,7 +12,7 @@ export async function generateMetadata({
 }: {
   params: { lang: "en" | "fr" };
 }): Promise<Metadata> {
-  const { lang } = params;
+  const { lang } = await params;
 
   const isFr = lang === "fr";
 

@@ -15,3 +15,106 @@
     font-size: 16px;
   }
 }
+
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroDrift {
+  from {
+    transform: scale(1.02) translate3d(-0.5%, -0.5%, 0);
+  }
+  to {
+    transform: scale(1.05) translate3d(0.5%, 0.5%, 0);
+  }
+}
+
+/* Classes */
+.hero-enter {
+  animation: heroEnter 500ms ease-out both;
+}
+
+.hero-drift {
+  animation: heroDrift 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Accessibility: respect Reduce Motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter,
+  .hero-drift {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+/* CTA: primary button microinteraction */
+.cta-primary {
+  transform: translateY(0);
+  transition: transform 180ms ease, box-shadow 220ms ease, filter 220ms ease;
+  will-change: transform;
+}
+
+.cta-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.02);
+}
+
+.cta-primary:active {
+  transform: translateY(0);
+}
+
+.cta-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.35);
+}
+
+/* CTA: secondary link microinteraction */
+.cta-link {
+  position: relative;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.cta-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.cta-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Arrow nudge (optional, subtle) */
+.cta-arrow {
+  display: inline-block;
+  transition: transform 220ms ease;
+}
+
+.cta-link:hover .cta-arrow {
+  transform: translateX(2px);
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .cta-primary,
+  .cta-link,
+  .cta-arrow {
+    transition: none !important;
+  }
+}
