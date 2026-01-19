@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 type Lang = "en" | "fr";
 
@@ -180,7 +181,7 @@ function LeadGenFlow({ t }: { t: any }) {
         </span>
       </div>
 
-      <div className="grid grid-cols-[1fr,auto,1fr,auto,1fr,auto,1fr] items-center gap-2">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-[1fr,auto,1fr,auto,1fr,auto,1fr] sm:items-center">
         <FlowNode
           title={t.leadFlow.nodes.visitor.title}
           subtitle={t.leadFlow.nodes.visitor.subtitle}
@@ -217,7 +218,12 @@ function LeadGenFlow({ t }: { t: any }) {
 function FlowArrow() {
   return (
     <div className="flex items-center justify-center text-slate-400 dark:text-slate-600">
-      <span aria-hidden>→</span>
+      <span className="hidden sm:inline" aria-hidden>
+        →
+      </span>
+      <span className="sm:hidden" aria-hidden>
+        ↓
+      </span>
     </div>
   );
 }
@@ -250,33 +256,51 @@ function FlowNode({
   );
 }
 
-function ScoreLoop({ label, caption }: { label: string; caption: string }) {
-  const [score, setScore] = useState(72);
+export function ScoreLoop({
+  label,
+  caption,
+}: {
+  label: string;
+  caption: string;
+}) {
+  const [score, setScore] = useState<number | null>(null);
 
   useEffect(() => {
+    // Set a stable initial value after mount
+    setScore(72);
+
     const id = setInterval(() => {
-      setScore((s) => (s >= 98 ? 72 : s + 1));
+      setScore((s) => {
+        const curr = typeof s === "number" ? s : 72;
+        return curr >= 98 ? 72 : curr + 1;
+      });
     }, 80);
+
     return () => clearInterval(id);
   }, []);
 
   return (
-    <div className="h-full w-full flex items-center justify-center">
-      <div className="w-full px-4 pb-4">
-        <div className="flex items-end justify-between">
-          <p className="text-xs uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
+    <div className="h-full w-full">
+      <div className="w-full px-4 pb-4 pt-4">
+        <div className="flex items-baseline justify-between gap-3 min-w-0">
+          <p className="text-[10px] uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500 whitespace-nowrap">
             {label}
           </p>
-          <p className="text-2xl font-semibold text-slate-900 dark:text-white tabular-nums">
-            {score}
-          </p>
+
+          <div className="shrink-0 pr-2">
+            <p className="text-2xl font-semibold text-slate-900 dark:text-white tabular-nums leading-none">
+              {score ?? "—"}
+            </p>
+          </div>
         </div>
+
         <div className="mt-3 h-2 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
           <div
-            className="h-full rounded-full bg-emerald-400 transition-all duration-300 ease-out"
-            style={{ width: `${score}%` }}
+            className="h-full rounded-full bg-emerald-400 transition-[width] duration-300 ease-out"
+            style={{ width: `${score ?? 0}%` }}
           />
         </div>
+
         <p className="mt-2 text-[0.75rem] text-slate-600 dark:text-slate-300">
           {caption}
         </p>
@@ -284,6 +308,64 @@ function ScoreLoop({ label, caption }: { label: string; caption: string }) {
     </div>
   );
 }
+function useSafeHash() {
+  const pathname = usePathname();
+  const [hash, setHash] = useState("");
+
+  useEffect(() => {
+    const update = () => setHash(window.location.hash || "");
+    update();
+    window.addEventListener("hashchange", update);
+    return () => window.removeEventListener("hashchange", update);
+  }, []);
+
+  useEffect(() => {
+    // re-sync after route changes (e.g., locale switch)
+    setHash(window.location.hash || "");
+  }, [pathname]);
+
+  return hash;
+}
+
+function LangSwitcher({ lang }: { lang: "en" | "fr" }) {
+  const router = useRouter();
+  const hash = useSafeHash();
+
+  function switchLang(next: "en" | "fr") {
+    document.cookie = `lang=${next}; path=/; max-age=31536000`;
+    const hash = window.location.hash || "";
+    window.location.href = `/${next}${hash}`;
+  }
+
+  return (
+    <div className="inline-flex items-center rounded-full border border-slate-300/60 bg-white/70 p-1 text-xs backdrop-blur transition-colors duration-200 dark:border-slate-700/60 dark:bg-slate-900/50">
+      <button
+        type="button"
+        onClick={() => switchLang("en")}
+        className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${
+          lang === "en"
+            ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
+            : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+        }`}
+      >
+        EN
+      </button>
+
+      <button
+        type="button"
+        onClick={() => switchLang("fr")}
+        className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${
+          lang === "fr"
+            ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
+            : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+        }`}
+      >
+        FR
+      </button>
+    </div>
+  );
+}
+
 /* Home client*/
 export default function HomeClient({
   lang,
@@ -300,14 +382,6 @@ export default function HomeClient({
   );
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  {
-    /* switchlang function*/
-  }
-  function switchLang(next: "en" | "fr") {
-    document.cookie = `lang=${next}; path=/; max-age=31536000`;
-    const hash = typeof window !== "undefined" ? window.location.hash : "";
-    window.location.href = `/${next}${hash}`;
-  }
 
   const [formState, setFormState] = useState<{
     status: "idle" | "sending" | "sent" | "error";
@@ -345,6 +419,12 @@ export default function HomeClient({
 
       setFormState({ status: "error", message: msg });
     }
+  }
+
+  function switchLang(next: "en" | "fr") {
+    document.cookie = `lang=${next}; path=/; max-age=31536000`;
+    const hash = window.location.hash || "";
+    window.location.href = `/${next}${hash}`;
   }
 
   return (
@@ -398,11 +478,9 @@ export default function HomeClient({
 
             <div className="hidden sm:flex items-center gap-2">
               <div className="inline-flex items-center rounded-full border border-slate-300/60 bg-white/70 p-1 text-xs backdrop-blur transition-colors duration-200 dark:border-slate-700/60 dark:bg-slate-900/50">
-                <Link
-                  href={`/en${
-                    typeof window !== "undefined" ? window.location.hash : ""
-                  }`}
-                  scroll={false}
+                <button
+                  type="button"
+                  onClick={() => switchLang("en")}
                   className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${
                     lang === "en"
                       ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
@@ -410,13 +488,11 @@ export default function HomeClient({
                   }`}
                 >
                   EN
-                </Link>
+                </button>
 
-                <Link
-                  href={`/fr${
-                    typeof window !== "undefined" ? window.location.hash : ""
-                  }`}
-                  scroll={false}
+                <button
+                  type="button"
+                  onClick={() => switchLang("fr")}
                   className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${
                     lang === "fr"
                       ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
@@ -424,7 +500,7 @@ export default function HomeClient({
                   }`}
                 >
                   FR
-                </Link>
+                </button>
               </div>
             </div>
 
@@ -586,7 +662,10 @@ export default function HomeClient({
                   href="#work"
                   className="cta-link inline-flex items-center gap-2 text-sm text-slate-700 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white"
                 >
-                  {t.hero.ctaSecondary} <span className="cta-link cta-arrow"aria-hidden>→</span>
+                  {t.hero.ctaSecondary}{" "}
+                  <span className="cta-link cta-arrow" aria-hidden>
+                    →
+                  </span>
                 </a>
               </div>
 
@@ -631,129 +710,155 @@ export default function HomeClient({
           </div>
         </section>
 
-        {/* Work (kept as-is for now) */}
-        <section id="work" className="space-y-8 scroll-mt-32">
-          <div className="flex items-center justify-between gap-4">
-            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
-              {t.work.title}
-            </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md">
-              {t.work.subtitle}
-            </p>
-          </div>
+        {/* Work */}
+        <section id="work" className="relative isolate py-10 sm:py-12">
+          {/* Background */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 -top-6 h-px
+               bg-gradient-to-r from-transparent via-slate-200 to-transparent
+               dark:via-slate-700"
+          />
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {/* OTA */}
-            <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
-              <div className="relative h-40 sm:aspect-video sm:h-auto aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-slate-200 via-slate-400 to-slate-200/0 dark:from-slate-900 dark:via-slate-700 dark:to-slate-900/0">
-                <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700 backdrop-blur dark:text-emerald-200">
-                  <span aria-hidden>⏳</span>
-                  <span>{t.work.ota.badge}</span>
-                </div>
-                <div className="absolute bottom-3 left-3 right-3">
-                  <div className="rounded-xl border border-slate-200/70 bg-white/70 px-3 py-2 text-xs text-slate-700 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/40 dark:text-slate-200">
-                    {t.work.ota.note}
+          {/* gentle “carryover” glow from hero (very subtle) */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 -top-10 h-24
+               bg-gradient-to-b from-emerald-500/6 via-transparent to-transparent
+               dark:from-emerald-400/10"
+          />
+    
+          {/* soft spotlight behind the grid (NOT a panel) */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10
+               bg-[radial-gradient(900px_circle_at_15%_15%,rgba(16,185,129,0.08),transparent_60%),radial-gradient(900px_circle_at_85%_25%,rgba(99,102,241,0.06),transparent_60%)]
+               dark:bg-[radial-gradient(900px_circle_at_15%_15%,rgba(52,211,153,0.10),transparent_60%),radial-gradient(900px_circle_at_85%_25%,rgba(129,140,248,0.08),transparent_60%)]"
+          />
+
+          <div className="relative z-10 px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
+                {t.work.title}
+              </h2>
+              <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md">
+                {t.work.subtitle}
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {/* OTA */}
+              <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
+                <div className="relative h-40 sm:aspect-video sm:h-auto aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-slate-200 via-slate-400 to-slate-200/0 dark:from-slate-900 dark:via-slate-700 dark:to-slate-900/0">
+                  <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700 backdrop-blur dark:text-emerald-200">
+                    <span aria-hidden>⏳</span>
+                    <span>{t.work.ota.badge}</span>
+                  </div>
+                  <div className="absolute bottom-3 left-3 right-3">
+                    <div className="rounded-xl border border-slate-200/70 bg-white/70 px-3 py-2 text-xs text-slate-700 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/40 dark:text-slate-200">
+                      {t.work.ota.note}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                {t.work.ota.title}
-              </h3>
-              <p className="text-sm text-slate-700 dark:text-slate-300">
-                {t.work.ota.desc}
-              </p>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
-                {t.work.ota.meta}
-              </p>
-              <span className="inline-flex items-center gap-1 text-xs text-emerald-700 dark:text-emerald-400/90">
-                {t.work.ota.footer}
-              </span>
-            </article>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                  {t.work.ota.title}
+                </h3>
+                <p className="text-sm text-slate-700 dark:text-slate-300">
+                  {t.work.ota.desc}
+                </p>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
+                  {t.work.ota.meta}
+                </p>
+                <span className="inline-flex items-center gap-1 text-xs text-emerald-700 dark:text-emerald-400/90">
+                  {t.work.ota.footer}
+                </span>
+              </article>
 
-            {/* Lead Gen */}
-            <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
-              <div className="aspect-video h-40 sm:aspect-video sm:h-auto overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
-                <LeadGenFlow t={t} />
-              </div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                {t.work.leadgen.title}
-              </h3>
-              <p className="text-sm text-slate-700 dark:text-slate-300">
-                {t.work.leadgen.desc}
-              </p>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
-                {t.work.leadgen.meta}
-              </p>
-              <span className="inline-flex items-center gap-1 text-xs text-slate-700 dark:text-slate-200/80">
-                {t.work.leadgen.footer}
-              </span>
-            </article>
+              {/* Lead Gen */}
+              <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 min-w-0">
+                <div className="aspect-video h-40 sm:aspect-video sm:h-auto overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
+                  <LeadGenFlow t={t} />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                  {t.work.leadgen.title}
+                </h3>
+                <p className="text-sm text-slate-700 dark:text-slate-300">
+                  {t.work.leadgen.desc}
+                </p>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
+                  {t.work.leadgen.meta}
+                </p>
+                <span className="inline-flex items-center gap-1 text-xs text-slate-700 dark:text-slate-200/80">
+                  {t.work.leadgen.footer}
+                </span>
+              </article>
 
-            {/* Scoring Concept */}
-            <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
-              <div className="relative h-40 sm:aspect-video sm:h-auto rounded-xl bg-slate-200/60 dark:bg-slate-800/30 overflow-hidden">
-                <ScoreLoop
-                  label={t.work.scoring.loopLabel}
-                  caption={t.work.scoring.loopCaption}
-                />
-              </div>
-
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                {t.work.scoring.title}
-              </h3>
-              <p className="text-sm text-slate-700 dark:text-slate-300">
-                {t.work.scoring.desc}
-              </p>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
-                {t.work.scoring.meta}
-              </p>
-              <span className="inline-flex items-center gap-1 text-xs text-slate-700 dark:text-slate-200/80">
-                {t.work.scoring.footer}
-              </span>
-            </article>
-
-            {/* Cryo-Air */}
-            <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
-              <button
-                type="button"
-                onClick={() =>
-                  setActiveCaseStudy((prev) =>
-                    prev === "cryoair" ? null : "cryoair"
-                  )
-                }
-                className="flex flex-col gap-4 text-left group"
-              >
-                <div className="relative h-40 sm:aspect-video sm:h-auto aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
-                  <Image
-                    src="/work/cryoair-homepage.png"
-                    alt="Cryo-Air homepage screenshot"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    priority={false}
+              {/* Scoring Concept */}
+              <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 min-w-0">
+                <div className="relative h-40 sm:aspect-video sm:h-auto rounded-xl bg-slate-200/60 dark:bg-slate-800/30 overflow-hidden p-2">
+                  <ScoreLoop
+                    label={t.work.scoring.loopLabel}
+                    caption={t.work.scoring.loopCaption}
                   />
                 </div>
 
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                  {t.work.cryoair.title}
+                  {t.work.scoring.title}
                 </h3>
                 <p className="text-sm text-slate-700 dark:text-slate-300">
-                  {t.work.cryoair.desc}
+                  {t.work.scoring.desc}
                 </p>
                 <p className="text-xs text-slate-600 dark:text-slate-400">
-                  {t.work.cryoair.meta}
+                  {t.work.scoring.meta}
                 </p>
                 <span className="inline-flex items-center gap-1 text-xs text-slate-700 dark:text-slate-200/80">
-                  Shopify / Liquid <span aria-hidden>•</span>{" "}
-                  <span className="cta-primary underline decoration-dotted">
-                    {activeCaseStudy === "cryoair"
-                      ? t.work.cryoair.hideDetails
-                      : t.work.cryoair.viewOverview}
-                  </span>
+                  {t.work.scoring.footer}
                 </span>
-              </button>
-            </article>
+              </article>
+
+              {/* Cryo-Air */}
+              <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 min-w-0">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setActiveCaseStudy((prev) =>
+                      prev === "cryoair" ? null : "cryoair"
+                    )
+                  }
+                  className="flex w-full min-w-0 flex-col gap-4 text-left group"
+                >
+                  <div className="relative h-40 sm:aspect-video sm:h-auto aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
+                    <Image
+                      src="/work/cryoair-homepage.png"
+                      alt="Cryo-Air homepage screenshot"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      priority={false}
+                    />
+                  </div>
+
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                    {t.work.cryoair.title}
+                  </h3>
+                  <p className="text-sm text-slate-700 dark:text-slate-300">
+                    {t.work.cryoair.desc}
+                  </p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400">
+                    {t.work.cryoair.meta}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-xs text-slate-700 dark:text-slate-200/80">
+                    Shopify / Liquid <span aria-hidden>•</span>{" "}
+                    <span className="cta-primary underline decoration-dotted">
+                      {activeCaseStudy === "cryoair"
+                        ? t.work.cryoair.hideDetails
+                        : t.work.cryoair.viewOverview}
+                    </span>
+                  </span>
+                </button>
+              </article>
+            </div>
           </div>
         </section>
 
@@ -807,10 +912,10 @@ export default function HomeClient({
 
               <div className="space-y-1">
                 <p className="font-semibold text-slate-900 dark:text-white">
-                  R{t.work.cryoair.resultLabel}
+                  {t.work.cryoair.resultLabel}
                 </p>
                 <p className="text-slate-600 dark:text-slate-400">
-                  C{t.work.cryoair.resultText}
+                  {t.work.cryoair.resultText}
                 </p>
               </div>
 
