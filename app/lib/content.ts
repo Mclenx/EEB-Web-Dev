@@ -80,10 +80,10 @@ export const content = {
       headline:
         "I design and build modern, bilingual websites that help small businesses grow.",
       subtext:
-        "From planning to final development, I handle the entire process so you don’t have to.",
+        "From planning to final development, I handle the entire process — so you don’t have to juggle multiple vendors.",
       personal:
-        "I’m Eric (EEB Web Dev). I work with jewelers, service providers, and local shops to create fast, modern websites that feel premium and easy to use.",
-      ctaPrimary: "Start a project",
+        "I’m Eric (EEB Web Dev). I work with jewelers, service providers, and local shops to create fast, modern websites that feel premium, clear, and easy to use.",
+      ctaPrimary: "Get in touch",
       ctaSecondary: "View recent work",
       stats: [
         { value: "5+ yrs", label: "Web experience" },
@@ -99,7 +99,7 @@ export const content = {
           "Pages: Home, About, Watch Repair, Custom Jewelry, Contact",
           "Stack: Next.js, Tailwind, image gallery, EN/FR",
         ],
-        note: "*This is an in-progress client project. I keep projects moving even when client content is delayed.",
+        note: "*This is an in-progress client project. I keep projects moving even when client content is delayed. I take on a limited number of projects to keep quality and communication high.",
       },
     },
 
@@ -191,18 +191,18 @@ export const content = {
     },
 
     contact: {
-      title: "Let’s build your site",
+      title: "Let’s talk about your website",
       subtitle:
-        "Tell me about your business and I’ll send back a rough timeline and price.",
+        "Tell me a bit about your business and what you’re looking for — I’ll follow up with a rough timeline and pricing.",
       name: "Your name",
       email: "Email",
       message:
-        "What kind of site do you need? (new site, redesign, bilingual, SEO...)",
-      send: "Send message",
-      note: "Simple one-page websites are available for businesses that need to get online quickly.",
+        "What kind of site are you thinking about? (new site, redesign, bilingual, SEO…)",
+      send: "Get in touch",
+      note: "Simple one-page websites are available if you need to get online quickly — no long-term commitment required.",
       availability: "EN / FR available",
       sending: "Sending…",
-      sent: "Sent — I’ll reply soon.",
+      sent: "Message sent — I’ll reply personally soon.",
       errorFallback: "Something went wrong — please try again later.",
     },
   },
@@ -283,10 +283,10 @@ export const content = {
       headline:
         "Je conçois et développe des sites web modernes et bilingues qui aident les petites entreprises à grandir.",
       subtext:
-        "Du plan initial au développement final, je m’occupe de tout le processus pour que vous n’ayez pas à le faire.",
+        "Du plan initial au développement final, je m’occupe de tout le processus — sans que vous ayez à coordonner plusieurs intervenants.",
       personal:
-        "Je m’appelle Eric (EEB Web Dev). J’aide les bijoutiers, entreprises de service et commerces locaux à obtenir un site rapide, moderne, premium et simple à utiliser.",
-      ctaPrimary: "Démarrer un projet",
+        "Je m’appelle Eric (EEB Web Dev). J’aide les bijoutiers, entreprises de service et commerces locaux à obtenir un site rapide, moderne, clair et simple à utiliser.",
+      ctaPrimary: "Me contacter",
       ctaSecondary: "Voir mes projets",
       stats: [
         { value: "5+ ans", label: "Expérience web" },
@@ -302,7 +302,7 @@ export const content = {
           "Pages : Accueil, À propos, Réparation de montres, Bijoux sur mesure, Contact",
           "Stack : Next.js, Tailwind, galerie d’images, EN/FR",
         ],
-        note: "*Il s’agit d’un projet client en cours. Je fais avancer les projets même lorsque le contenu prend du temps à arriver.",
+        note: "*Il s’agit d’un projet client en cours. Je fais avancer les projets même lorsque le contenu prend du temps à arriver. Je travaille avec un nombre limité de clients afin d’assurer un suivi et une qualité élevés.",
       },
     },
 
@@ -394,18 +394,18 @@ export const content = {
     },
 
     contact: {
-      title: "Créons votre site",
+      title: "Parlons de votre site web",
       subtitle:
-        "Parlez-moi de votre entreprise et je vous répondrai avec un délai approximatif et un prix.",
+        "Parlez-moi brièvement de votre entreprise et de vos besoins — je vous répondrai avec un délai approximatif et une estimation.",
       name: "Votre nom",
       email: "Courriel",
       message:
-        "De quel type de site avez-vous besoin? (nouveau site, refonte, bilingue, SEO...)",
-      send: "Envoyer",
+        "Quel type de site envisagez-vous? (nouveau site, refonte, bilingue, SEO…)",
+      send: "Me contacter",
       note: "Sites une page disponibles pour les entreprises qui veulent être en ligne rapidement.",
       availability: "EN / FR disponible",
       sending: "Envoi en cours…",
-      sent: "Envoyé — je vous réponds bientôt.",
+      sent: "Message envoyé — je vous répondrai personnellement sous peu.",
       errorFallback: "Un problème est survenu — veuillez réessayer plus tard.",
     },
   },
