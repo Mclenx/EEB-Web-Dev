@@ -681,30 +681,30 @@ export default function HomeClient({
               </div>
             </div>
 
-            {/* Right column — Next Project card */}
+            {/* Right column — Fast-Track Offer card */}
             <div className="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-lg backdrop-blur dark:border-slate-800 dark:bg-slate-950/55">
               <p className="text-sm text-slate-700 dark:text-slate-300">
-                {t.hero.nextProject.label}
+                {t.hero.fastTrack.label}
               </p>
 
               <div className="mt-4 rounded-xl border border-slate-200/70 bg-slate-100/70 p-4 dark:border-slate-800/70 dark:bg-slate-950/30">
-                <h2 className="text-base font-semibold text-slate-900 dark:text-white">
-                  {t.hero.nextProject.title}
+                <h2 className="text-lg font-semibold leading-snug text-slate-900 dark:text-white">
+                  {t.hero.fastTrack.title}
                 </h2>
 
                 <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                  {t.hero.nextProject.desc}
+                  {t.hero.fastTrack.desc}
                 </p>
 
                 <ul className="mt-3 space-y-1 text-xs text-slate-600 dark:text-slate-400">
-                  {t.hero.nextProject.bullets.map((item: string, i: number) => (
+                  {t.hero.fastTrack.bullets.map((item: string, i: number) => (
                     <li key={i}>• {item}</li>
                   ))}
                 </ul>
               </div>
 
               <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">
-                {t.hero.nextProject.note}
+                {t.hero.fastTrack.note}
               </p>
             </div>
           </div>
@@ -727,7 +727,7 @@ export default function HomeClient({
                bg-gradient-to-b from-emerald-500/6 via-transparent to-transparent
                dark:from-emerald-400/10"
           />
-    
+
           {/* soft spotlight behind the grid (NOT a panel) */}
           <div
             aria-hidden
