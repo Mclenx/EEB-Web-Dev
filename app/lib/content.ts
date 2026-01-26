@@ -92,8 +92,9 @@ export const content = {
       ],
       fastTrack: {
         label: "Fast-Track Offer",
-        title: "Single-Page Business Website — $350 · Delivered in 7 Days",
-        desc: "A clean, professional one-page site to get your business online quickly — with the option to expand later if you need more pages or features.",
+        title: "Single-Page Business Website",
+        subtitle: "$350 · Delivered in 7 Days",
+        desc: "A clean, professional one-page website to get your business online quickly, with the option to expand later as your content or needs grow.",
         bullets: [
           "Single-page layout (sections + clear CTA)",
           "Mobile-friendly & fast-loading",
@@ -102,7 +103,7 @@ export const content = {
           "EN / FR available",
           "No monthly fees",
         ],
-        note: "*Need more than one page? We can expand to multi-page as your content grows (priced based on scope).",
+        note: "*Need more than one page? We can expand to multi-page as your content grows (pricing adjusted based on scope).",
       },
     },
 
@@ -298,8 +299,9 @@ export const content = {
       ],
       fastTrack: {
         label: "Offre Express",
-        title: "Site web une page — 350 $ · Livré en 7 jours",
-        desc: "Un site une page propre et professionnel pour mettre votre entreprise en ligne rapidement — avec la possibilité d’ajouter des pages ou des fonctionnalités plus tard.",
+        title: "Site web une page",
+        subtitle: "350 $ · Livré en 7 jours",
+        desc: "Un site une page propre et professionnel pour mettre votre entreprise en ligne rapidement, avec la possibilité d’ajouter des pages ou des fonctionnalités selon l’évolution de vos besoins.",
         bullets: [
           "Mise en page une page (sections + appel à l’action clair)",
           "Adapté mobile & rapide",
@@ -308,7 +310,7 @@ export const content = {
           "EN / FR disponible",
           "Aucun frais mensuel",
         ],
-        note: "*Besoin de plus qu’une page? On peut évoluer vers un site multi-pages selon votre contenu (prix selon la portée).",
+        note: "*Besoin de plus qu’une page? Le site peut évoluer vers un format multi-pages (tarification ajustée selon la portée).",
       },
     },
 

@@ -690,6 +690,9 @@ export default function HomeClient({
               <div className="mt-4 rounded-xl border border-slate-200/70 bg-slate-100/70 p-4 dark:border-slate-800/70 dark:bg-slate-950/30">
                 <h2 className="text-lg font-semibold leading-snug text-slate-900 dark:text-white">
                   {t.hero.fastTrack.title}
+                  <span className="mt-1 block font-normal text-slate-700 dark:text-slate-300">
+                    {t.hero.fastTrack.subtitle}
+                  </span>
                 </h2>
 
                 <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
