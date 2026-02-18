@@ -186,6 +186,11 @@ export const content = {
         demoCta: "Preview demo",
         buyCta: "Buy on Gumroad",
         microNote: "Full details, license, and download are on Gumroad.",
+
+        links: {
+          demo: "https://website-system-v1.pages.dev",
+          gumroad: "https://boisvert28.gumroad.com/l/zznun",
+        },
       },
 
       mvp1: {
@@ -423,6 +428,11 @@ export const content = {
         buyCta: "Acheter sur Gumroad",
         microNote:
           "Tous les détails, la licence et le téléchargement sont sur Gumroad.",
+
+        links: {
+          demo: "https://website-system-v1.pages.dev",
+          gumroad: "https://boisvert28.gumroad.com/l/zznun",
+        },
       },
 
       mvp1: {
