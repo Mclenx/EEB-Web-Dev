@@ -73,6 +73,7 @@ export const content = {
       about: "About",
       contact: "Contact",
       cta: "Get a website",
+      products: "Products",
     },
 
     hero: {
@@ -165,6 +166,34 @@ export const content = {
           "I’m currently sketching a modern concept redesign for this project that reflects my current design standards. Once it’s ready, I’ll link the live demo here.",
         viewOverview: "View project overview",
         hideDetails: "Hide details",
+      },
+    },
+
+    products: {
+      title: "Products",
+      subtitle:
+        "Digital kits and tools I’m building to help small businesses launch faster.",
+
+      kitV1: {
+        badge: "Website kit",
+        title: "Website System Kit v1",
+        desc: "A clean, modern starter kit for service businesses — built to launch fast and expand later.",
+        meta: "Kit • Next.js / Tailwind",
+        cta: "View",
+        pageTitle: "Website System Kit v1",
+        pageDesc:
+          "A clean, modern website starter kit built to launch fast — with room to expand.",
+        demoCta: "Preview demo",
+        buyCta: "Buy on Gumroad",
+        microNote: "Full details, license, and download are on Gumroad.",
+      },
+
+      mvp1: {
+        badge: "Tool (soon)",
+        title: "MVP1 — SEO Scoring",
+        desc: "An upcoming tool that evaluates websites using real SEO and performance signals.",
+        meta: "Coming soon",
+        cta: "Coming soon",
       },
     },
 
@@ -280,6 +309,7 @@ export const content = {
       about: "À propos",
       contact: "Contact",
       cta: "Créer mon site",
+      products: "Produits",
     },
 
     hero: {
@@ -372,6 +402,35 @@ export const content = {
           "Je prépare actuellement un concept redesign moderne qui reflète mon niveau actuel. Quand il sera prêt, je l’ajouterai ici.",
         viewOverview: "Voir l’aperçu du projet",
         hideDetails: "Masquer les détails",
+      },
+    },
+
+    products: {
+      title: "Produits",
+      subtitle:
+        "Kits et outils numériques que je construis pour aider les petites entreprises à lancer plus vite.",
+
+      kitV1: {
+        badge: "Kit web",
+        title: "Website System Kit v1",
+        desc: "Un kit de départ propre et moderne pour entreprises de service — conçu pour lancer vite et évoluer ensuite.",
+        meta: "Kit • Next.js / Tailwind",
+        cta: "Voir",
+        pageTitle: "Website System Kit v1",
+        pageDesc:
+          "Un kit de départ propre et moderne, conçu pour lancer vite — avec de la marge pour évoluer.",
+        demoCta: "Voir la démo",
+        buyCta: "Acheter sur Gumroad",
+        microNote:
+          "Tous les détails, la licence et le téléchargement sont sur Gumroad.",
+      },
+
+      mvp1: {
+        badge: "Outil (bientôt)",
+        title: "MVP1 — Score SEO",
+        desc: "Un outil à venir pour évaluer des sites selon des signaux SEO et performance.",
+        meta: "Bientôt disponible",
+        cta: "Bientôt disponible",
       },
     },
 
