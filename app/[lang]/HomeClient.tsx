@@ -378,7 +378,7 @@ export default function HomeClient({
 
   const [activeService, setActiveService] = useState<ServiceId>("websites");
   const [activeCaseStudy, setActiveCaseStudy] = useState<"cryoair" | null>(
-    null
+    null,
   );
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -448,25 +448,31 @@ export default function HomeClient({
 
           <nav className="hidden md:flex gap-6 items-center text-sm text-slate-600 dark:text-slate-200/80">
             <a
-              href="#work"
+              href={`/${lang}#work`}
               className="cta-link hover:text-slate-900 dark:hover:text-white transition"
             >
               {t.nav.work}
             </a>
             <a
-              href="#services"
+              href={`/${lang}#services`}
               className="cta-link hover:text-slate-900 dark:hover:text-white transition"
             >
               {t.nav.services}
             </a>
             <a
-              href="#about"
+              href={`/${lang}#products`}
+              className="cta-link hover:text-slate-900 dark:hover:text-white transition"
+            >
+              {t.nav.products}
+            </a>
+            <a
+              href={`/${lang}#about`}
               className="cta-link hover:text-slate-900 dark:hover:text-white transition"
             >
               {t.nav.about}
             </a>
             <a
-              href="#contact"
+              href={`/${lang}#contact`}
               className="cta-link hover:text-slate-900 dark:hover:text-white transition"
             >
               {t.nav.contact}
@@ -515,7 +521,7 @@ export default function HomeClient({
             </button>
 
             <a
-              href="#contact"
+              href={`/${lang}#contact`}
               onClick={() => setMobileOpen(false)}
               className="cta-primary inline-flex items-center rounded-full bg-emerald-400 px-4 py-1.5 text-sm font-medium text-slate-900 shadow transition hover:bg-emerald-300"
             >
@@ -528,28 +534,35 @@ export default function HomeClient({
           <div className="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur">
             <nav className="mx-auto max-w-6xl px-4 py-4 flex flex-col gap-4 text-sm text-slate-700 dark:text-slate-200">
               <a
-                href="#work"
+                href={`/${lang}#work`}
                 onClick={() => setMobileOpen(false)}
                 className="hover:text-slate-900 dark:hover:text-white"
               >
                 {t.nav.work}
               </a>
               <a
-                href="#services"
+                href={`/${lang}#services`}
                 onClick={() => setMobileOpen(false)}
                 className="hover:text-slate-900 dark:hover:text-white"
               >
                 {t.nav.services}
               </a>
               <a
-                href="#about"
+                href={`/${lang}#products`}
+                onClick={() => setMobileOpen(false)}
+                className="hover:text-slate-900 dark:hover:text-white"
+              >
+                {t.nav.products}
+              </a>
+              <a
+                href={`/${lang}#about`}
                 onClick={() => setMobileOpen(false)}
                 className="hover:text-slate-900 dark:hover:text-white"
               >
                 {t.nav.about}
               </a>
               <a
-                href="#contact"
+                href={`/${lang}#contact`}
                 onClick={() => setMobileOpen(false)}
                 className="hover:text-slate-900 dark:hover:text-white"
               >
@@ -592,7 +605,6 @@ export default function HomeClient({
 
       {/* Main */}
       <main className="mx-auto max-w-6xl px-4 pb-24 pt-16 flex flex-col gap-24">
-        {/* Hero */}
         {/* Hero */}
         <section className="relative overflow-hidden rounded-3xl px-6 py-16 sm:px-10">
           {/* ========================= */}
@@ -826,7 +838,7 @@ export default function HomeClient({
                   type="button"
                   onClick={() =>
                     setActiveCaseStudy((prev) =>
-                      prev === "cryoair" ? null : "cryoair"
+                      prev === "cryoair" ? null : "cryoair",
                     )
                   }
                   className="flex w-full min-w-0 flex-col gap-4 text-left group"
@@ -1033,6 +1045,100 @@ export default function HomeClient({
             </div>
 
             <ServiceDetailPanel activeService={activeService} t={t} />
+          </div>
+        </section>
+
+        {/* Products */}
+        <section id="products" className="relative isolate py-10 sm:py-12">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 -top-6 h-px
+      bg-gradient-to-r from-transparent via-slate-200 to-transparent
+      dark:via-slate-700"
+          />
+
+          <div className="relative z-10 px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
+                {t.products.title}
+              </h2>
+              <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md">
+                {t.products.subtitle}
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {/* Website System Kit v1 */}
+              <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
+                <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
+                  <Image
+                    src="/products/website-system-v1.png"
+                    alt={t.products.kitV1.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700 backdrop-blur dark:text-emerald-200">
+                    {t.products.kitV1.badge}
+                  </div>
+                </div>
+
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                  {t.products.kitV1.title}
+                </h3>
+
+                <p className="text-sm text-slate-700 dark:text-slate-300">
+                  {t.products.kitV1.desc}
+                </p>
+
+                <div className="mt-auto flex items-center justify-between gap-3">
+                  <Link
+                    href={`/${lang}/products/kit/website-system-v1`}
+                    className="inline-flex items-center rounded-full bg-emerald-400 px-4 py-1.5 text-sm font-medium text-slate-900 shadow transition hover:bg-emerald-300"
+                  >
+                    {t.products.kitV1.cta}
+                  </Link>
+
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
+                    {t.products.kitV1.meta}
+                  </span>
+                </div>
+              </article>
+
+              {/* MVP1 (Coming soon) */}
+              <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 opacity-80">
+                <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/30 flex items-center justify-center">
+                  <span className="text-xs tracking-wide text-slate-400 dark:text-slate-500 uppercase">
+                    Preview coming soon
+                  </span>
+
+                  <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full border border-slate-300/60 bg-white/60 px-3 py-1 text-xs text-slate-700 backdrop-blur dark:border-slate-700/60 dark:bg-slate-950/40 dark:text-slate-200">
+                    {t.products.mvp1.badge}
+                  </div>
+                </div>
+
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                  {t.products.mvp1.title}
+                </h3>
+
+                <p className="text-sm text-slate-700 dark:text-slate-300">
+                  {t.products.mvp1.desc}
+                </p>
+
+                <div className="mt-auto flex items-center justify-between gap-3">
+                  <span
+                    className="inline-flex items-center rounded-full border border-slate-300/60 px-4 py-1.5 text-sm text-slate-500 dark:border-slate-700/60 dark:text-slate-400 cursor-not-allowed"
+                    aria-disabled="true"
+                  >
+                    {t.products.mvp1.cta}
+                  </span>
+
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
+                    {t.products.mvp1.meta}
+                  </span>
+                </div>
+              </article>
+            </div>
           </div>
         </section>
 
