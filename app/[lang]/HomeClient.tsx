@@ -976,7 +976,8 @@ export default function HomeClient({
         )}
 
         {/* Services */}
-        <section id="services" className="space-y-8 scroll-mt-24">
+        <section id="services" className="relative isolate scroll-mt-24 py-10 sm:py-12">
+          <div className="px-4 sm:px-6 lg:px-8 space-y-8">
           <h2 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
             {t.services.title}
           </h2>
@@ -1046,6 +1047,7 @@ export default function HomeClient({
 
             <ServiceDetailPanel activeService={activeService} t={t} />
           </div>
+          </div>
         </section>
 
         {/* Products */}
@@ -1057,20 +1059,20 @@ export default function HomeClient({
       dark:via-slate-700"
           />
 
-          <div className="relative z-10 px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl">
               <h2 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
                 {t.products.title}
               </h2>
-              <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 {t.products.subtitle}
               </p>
             </div>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 sm:mt-14 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {/* Website System Kit v1 */}
-              <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
-                <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
+              <article className="lg:col-start-2 rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 transition-transform transition-shadow duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/30">
                   <Image
                     src="/products/website-system-v1.png"
                     alt={t.products.kitV1.title}
@@ -1106,10 +1108,10 @@ export default function HomeClient({
               </article>
 
               {/* MVP1 (Coming soon) */}
-              <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 opacity-80">
-                <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/30 flex items-center justify-center">
-                  <span className="text-xs tracking-wide text-slate-400 dark:text-slate-500 uppercase">
-                    Preview coming soon
+              <article className="lg:col-start-3 rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 transition-transform transition-shadow duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/30 flex items-center justify-center">
+                  <span className="text-xs tracking-wide text-slate-400 dark:text-slate-500 uppercase text-center px-4">
+                    {t.products.mvp1.previewNote}
                   </span>
 
                   <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full border border-slate-300/60 bg-white/60 px-3 py-1 text-xs text-slate-700 backdrop-blur dark:border-slate-700/60 dark:bg-slate-950/40 dark:text-slate-200">
@@ -1127,7 +1129,7 @@ export default function HomeClient({
 
                 <div className="mt-auto flex items-center justify-between gap-3">
                   <span
-                    className="inline-flex items-center rounded-full border border-slate-300/60 px-4 py-1.5 text-sm text-slate-500 dark:border-slate-700/60 dark:text-slate-400 cursor-not-allowed"
+                    className="inline-flex items-center rounded-full border border-slate-300/60 px-4 py-1.5 text-sm text-slate-500 dark:border-slate-700/60 dark:text-slate-400 cursor-not-allowed bg-slate-100 dark:bg-slate-800"
                     aria-disabled="true"
                   >
                     {t.products.mvp1.cta}

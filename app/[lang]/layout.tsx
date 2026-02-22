@@ -10,9 +10,9 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { lang: "en" | "fr" };
+  params: Promise <{ lang: "en" | "fr" }>;
 }): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang } =  await params;
 
   const isFr = lang === "fr";
 
@@ -29,8 +29,6 @@ export async function generateMetadata({
   return {
     title,
     description,
-
-    // Canonical + hreflang
     alternates: {
       canonical: url,
       languages: {
@@ -39,8 +37,6 @@ export async function generateMetadata({
         "x-default": `${baseUrl}/en`,
       },
     },
-
-    // OG basics 
     openGraph: {
       title,
       description,
@@ -57,7 +53,6 @@ export async function generateMetadata({
         },
       ],
     },
-
     twitter: {
       card: "summary_large_image",
       title,
@@ -69,9 +64,11 @@ export async function generateMetadata({
 
 export default function LangLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: "en" | "fr" };
 }) {
+  // params is intentionally unused here, but required so Next passes it correctly
   return <>{children}</>;
 }
-

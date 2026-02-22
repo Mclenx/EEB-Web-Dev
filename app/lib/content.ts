@@ -173,6 +173,8 @@ export const content = {
       title: "Products",
       subtitle:
         "Digital kits and tools I’m building to help small businesses launch faster.",
+      back: "Back",
+
 
       kitV1: {
         badge: "Website kit",
@@ -199,6 +201,7 @@ export const content = {
         desc: "An upcoming tool that evaluates websites using real SEO and performance signals.",
         meta: "Coming soon",
         cta: "Coming soon",
+        previewNote: "Preview coming soon",
       },
     },
 
@@ -414,6 +417,7 @@ export const content = {
       title: "Produits",
       subtitle:
         "Kits et outils numériques que je construis pour aider les petites entreprises à lancer plus vite.",
+        back: "Retour",
 
       kitV1: {
         badge: "Kit web",
@@ -441,6 +445,7 @@ export const content = {
         desc: "Un outil à venir pour évaluer des sites selon des signaux SEO et performance.",
         meta: "Bientôt disponible",
         cta: "Bientôt disponible",
+        previewNote: "Aperçu bientôt disponible",
       },
     },
 

@@ -4,19 +4,29 @@ import { content } from "@/app/lib/content";
 
 type Lang = "en" | "fr";
 
-export default function WebsiteSystemV1Page({
+export default async function WebsiteSystemV1Page({
   params,
 }: {
-  params: { lang: Lang };
+  params: Promise<{ lang: Lang }>;
 }) {
-  const lang = params.lang;
+  const { lang } = await params;
   const t = content[lang] ?? content.en;
   const kit = t.products.kitV1;
 
   return (
     <main className="px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl py-14 sm:py-16 text-center">
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white">
+        <div className="w-full text-left">
+          <Link
+            href={`/${lang}#products`}
+            className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-900 transition dark:text-slate-400 dark:hover:text-white"
+          >
+            <span aria-hidden>←</span>
+            <span>{t.products.back}</span>
+          </Link>
+        </div>
+
+        <h1 className="mt-6 text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white">
           {kit.pageTitle}
         </h1>
 
@@ -24,9 +34,9 @@ export default function WebsiteSystemV1Page({
           {kit.pageDesc}
         </p>
 
-        <div className="mt-8 relative aspect-video overflow-hidden rounded-2xl border border-slate-200 shadow-sm dark:border-slate-800">
+        <div className="mt-6 sm:mt-8 relative aspect-video overflow-hidden rounded-2xl border border-slate-200 shadow-sm dark:border-slate-800">
           <Image
-            src="/products/website-system-v1.png"
+            src="/products/website-system-v1-banner.png"
             alt={kit.title}
             fill
             className="object-cover"
