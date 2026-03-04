@@ -74,6 +74,10 @@ export const content = {
       contact: "Contact",
       cta: "Get a website",
       products: "Products",
+      themeToggle:{
+        light:"☀️ Light",
+        dark:"🌙 Dark",
+      },
     },
 
     hero: {
@@ -318,6 +322,10 @@ export const content = {
       contact: "Contact",
       cta: "Créer mon site",
       products: "Produits",
+      themeToggle:{
+        light:"☀️ Claire",
+        dark:"🌙 Sombre",
+      },
     },
 
     hero: {
