@@ -12,6 +12,9 @@ export default async function WebsiteSystemV1Page({
   const { lang } = await params;
   const t = content[lang] ?? content.en;
   const kit = t.products.kitV1;
+  const banner = lang === "fr"
+  ? "/products/website-system-kit-v1-banner-fr.png"
+  : "/products/website-system-v1-banner.png";
 
   return (
     <main className="px-4 sm:px-6 lg:px-8">
@@ -36,7 +39,7 @@ export default async function WebsiteSystemV1Page({
 
         <div className="mt-6 sm:mt-8 relative aspect-video overflow-hidden rounded-2xl border border-slate-200 shadow-sm dark:border-slate-800">
           <Image
-            src="/products/website-system-v1-banner.png"
+            src={banner}
             alt={kit.title}
             fill
             className="object-cover"
