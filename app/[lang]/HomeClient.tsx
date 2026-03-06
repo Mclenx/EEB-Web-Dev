@@ -5,10 +5,13 @@ import { useTheme } from "next-themes";
 import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { content  as siteContent} from "../lib/content";
+import type { TContent } from "../lib/content";
 
 type Lang = "en" | "fr";
+type ContentMap = typeof siteContent;
 
-function ThemeToggle() {
+function ThemeToggle({t}: {t:TContent}) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -24,7 +27,7 @@ function ThemeToggle() {
       className="inline-flex items-center justify-center rounded-full border border-slate-300/60 bg-slate-100/70 px-3 py-1 text-xs text-slate-800 hover:bg-slate-200 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-800"
       aria-label="Toggle theme"
     >
-      {isDark ? "🌙 Dark" : "☀️ Light"}
+      {isDark ? `🌙 ${t.nav.themeToggle.dark}` : `☀️ ${t.nav.themeToggle.light}`}
     </button>
   );
 }
@@ -372,7 +375,7 @@ export default function HomeClient({
   content,
 }: {
   lang: Lang;
-  content: any;
+  content: ContentMap;
 }) {
   const t = content[lang] ?? content.en;
 
@@ -480,7 +483,7 @@ export default function HomeClient({
           </nav>
 
           <div className="flex items-center gap-2 md:gap-3">
-            <ThemeToggle />
+            <ThemeToggle t={t}/>
 
             <div className="hidden sm:flex items-center gap-2">
               <div className="inline-flex items-center rounded-full border border-slate-300/60 bg-white/70 p-1 text-xs backdrop-blur transition-colors duration-200 dark:border-slate-700/60 dark:bg-slate-900/50">
@@ -936,7 +939,7 @@ export default function HomeClient({
 
               <div className="space-y-1">
                 <p className="font-semibold text-slate-900 dark:text-white">
-                  {t.work.cryoair.resultStatus}
+                  {t.work.cryoair.statusLabel}
                 </p>
                 <p className="text-slate-600 dark:text-slate-400">
                   {t.work.cryoair.statusText}
@@ -957,13 +960,7 @@ export default function HomeClient({
             </div>
 
             <div className="flex items-center gap-4">
-              <a
-                href="https://cryo-air.ca"
-                target="_blank"
-                className="inline-flex items-center text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
-              >
-                {t.work.cryoair.visit}
-              </a>
+           
               <button
                 type="button"
                 onClick={() => setActiveCaseStudy(null)}

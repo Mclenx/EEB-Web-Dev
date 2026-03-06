@@ -1,5 +1,5 @@
-export const content = {
-  en: {
+
+  const en =  {
     leadFlow: {
       title: "Lead flow",
       badge: "Demo system",
@@ -75,8 +75,8 @@ export const content = {
       cta: "Get a website",
       products: "Products",
       themeToggle:{
-        light:"☀️ Light",
-        dark:"🌙 Dark",
+        light:"Light",
+        dark:"Dark",
       },
     },
 
@@ -170,6 +170,7 @@ export const content = {
           "I’m currently sketching a modern concept redesign for this project that reflects my current design standards. Once it’s ready, I’ll link the live demo here.",
         viewOverview: "View project overview",
         hideDetails: "Hide details",
+        close: "Close",
       },
     },
 
@@ -250,9 +251,11 @@ export const content = {
       sent: "Message sent — I’ll reply personally soon.",
       errorFallback: "Something went wrong — please try again later.",
     },
-  },
+  };
 
-  fr: {
+  export type TContent = typeof en;
+
+  const fr: TContent = {
     leadFlow: {
       title: "Flux de prospects",
       badge: "Système démo",
@@ -323,8 +326,8 @@ export const content = {
       cta: "Créer mon site",
       products: "Produits",
       themeToggle:{
-        light:"☀️ Claire",
-        dark:"🌙 Sombre",
+        light:"Clair",
+        dark:"Sombre",
       },
     },
 
@@ -418,6 +421,7 @@ export const content = {
           "Je prépare actuellement un concept redesign moderne qui reflète mon niveau actuel. Quand il sera prêt, je l’ajouterai ici.",
         viewOverview: "Voir l’aperçu du projet",
         hideDetails: "Masquer les détails",
+        close: "Fermer"
       },
     },
 
@@ -498,5 +502,7 @@ export const content = {
       sent: "Message envoyé — je vous répondrai personnellement sous peu.",
       errorFallback: "Un problème est survenu — veuillez réessayer plus tard.",
     },
-  },
-} as const;
+  };
+
+
+export const content = { en, fr } as const;
