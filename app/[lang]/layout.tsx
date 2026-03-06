@@ -62,13 +62,13 @@ export async function generateMetadata({
   };
 }
 
-export default function LangLayout({
+export default async function LangLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: "en" | "fr" };
+  params: Promise<{ lang: string }>;
 }) {
-  // params is intentionally unused here, but required so Next passes it correctly
+  await params;
   return <>{children}</>;
 }
