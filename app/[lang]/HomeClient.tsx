@@ -9,6 +9,7 @@ import { content as siteContent } from "../lib/content";
 import type { TContent } from "../lib/content";
 import { HeroSection } from "@/components/home/HeroSection";
 import { WorkSection } from "@/components/home/WorkSection";
+import { ServicesSection } from "@/components/home/ServicesSection";
 
 type Lang = "en" | "fr";
 type ContentMap = typeof siteContent;
@@ -34,144 +35,6 @@ function ThemeToggle({ t }: { t: TContent }) {
   );
 }
 
-type ServiceId =
-  | "websites"
-  | "service-businesses"
-  | "bilingual"
-  | "seo"
-  | "photography"
-  | "automation";
-
-function getServiceDetails(t: any): Record<
-  ServiceId,
-  {
-    title: string;
-    description: string;
-    tag: string;
-    icon: string;
-    visual: string;
-  }
-> {
-  return {
-    websites: {
-      title: t.serviceDetails.websites.title,
-      description: t.serviceDetails.websites.description,
-      tag: t.serviceDetails.websites.tag,
-      icon: "💻",
-      visual: t.serviceDetails.websites.visual,
-    },
-    "service-businesses": {
-      title: t.serviceDetails["service-businesses"].title,
-      description: t.serviceDetails["service-businesses"].description,
-      tag: t.serviceDetails["service-businesses"].tag,
-      icon: "🛠️",
-      visual: t.serviceDetails["service-businesses"].visual,
-    },
-    bilingual: {
-      title: t.serviceDetails.bilingual.title,
-      description: t.serviceDetails.bilingual.description,
-      tag: t.serviceDetails.bilingual.tag,
-      icon: "🇨🇦",
-      visual: t.serviceDetails.bilingual.visual,
-    },
-    seo: {
-      title: t.serviceDetails.seo.title,
-      description: t.serviceDetails.seo.description,
-      tag: t.serviceDetails.seo.tag,
-      icon: "📈",
-      visual: t.serviceDetails.seo.visual,
-    },
-    photography: {
-      title: t.serviceDetails.photography.title,
-      description: t.serviceDetails.photography.description,
-      tag: t.serviceDetails.photography.tag,
-      icon: "📷",
-      visual: t.serviceDetails.photography.visual,
-    },
-    automation: {
-      title: t.serviceDetails.automation.title,
-      description: t.serviceDetails.automation.description,
-      tag: t.serviceDetails.automation.tag,
-      icon: "⚙️",
-      visual: t.serviceDetails.automation.visual,
-    },
-  };
-}
-
-type ServiceWordProps = {
-  id: ServiceId;
-  children: ReactNode;
-  activeService: ServiceId;
-  setActiveService: (id: ServiceId) => void;
-};
-
-function ServiceWord({
-  id,
-  children,
-  activeService,
-  setActiveService,
-}: ServiceWordProps) {
-  const isActive = activeService === id;
-
-  return (
-    <button
-      type="button"
-      onMouseEnter={() => setActiveService(id)}
-      onFocus={() => setActiveService(id)}
-      onClick={() => setActiveService(id)}
-      className={`relative inline-flex items-center rounded-full px-1.5 py-0.5 text-[0.8rem] font-medium transition ${isActive
-          ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-200 border border-emerald-400/60"
-          : "border border-dashed border-emerald-300/60 text-emerald-700/90 dark:text-emerald-200/90 hover:bg-emerald-500/10"
-        }`}
-    >
-      {children}
-    </button>
-  );
-}
-
-type ServiceDetailPanelProps = {
-  activeService: ServiceId;
-  t: any;
-};
-
-function ServiceDetailPanel({ activeService, t }: ServiceDetailPanelProps) {
-  const service = getServiceDetails(t)[activeService];
-
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40">
-      <div className="flex items-center justify-between gap-3 mb-3">
-        <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800/80 dark:text-slate-200">
-          <span className="text-base">{service.icon}</span>
-          <span>{service.tag}</span>
-        </span>
-        <span className="text-[0.7rem] uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
-          {t.servicePanel.header}
-        </span>
-      </div>
-
-      <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2">
-        {service.title}
-      </h3>
-      <p className="text-sm text-slate-700 dark:text-slate-300">
-        {service.description}
-      </p>
-
-      <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/50 overflow-hidden">
-        <div className="flex items-center gap-1 px-3 py-2 border-b border-slate-200/70 dark:border-slate-800">
-          <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-700" />
-          <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-700" />
-          <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-700" />
-          <span className="ml-2 text-[0.65rem] uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
-            {t.servicePanel.preview}
-          </span>
-        </div>
-        <div className="h-28 flex items-center justify-center px-4 text-xs text-slate-600 dark:text-slate-300 text-center">
-          {service.visual}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function useSafeHash() {
   const pathname = usePathname();
@@ -208,8 +71,8 @@ function LangSwitcher({ lang }: { lang: "en" | "fr" }) {
         type="button"
         onClick={() => switchLang("en")}
         className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${lang === "en"
-            ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
-            : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+          ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
+          : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
           }`}
       >
         EN
@@ -219,8 +82,8 @@ function LangSwitcher({ lang }: { lang: "en" | "fr" }) {
         type="button"
         onClick={() => switchLang("fr")}
         className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${lang === "fr"
-            ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
-            : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+          ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
+          : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
           }`}
       >
         FR
@@ -238,8 +101,6 @@ export default function HomeClient({
   content: ContentMap;
 }) {
   const t = content[lang] ?? content.en;
-
-  const [activeService, setActiveService] = useState<ServiceId>("websites");
   const [activeCaseStudy, setActiveCaseStudy] = useState<string | null>(null);
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -349,8 +210,8 @@ export default function HomeClient({
                   type="button"
                   onClick={() => switchLang("en")}
                   className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${lang === "en"
-                      ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
-                      : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                    ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
+                    : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
                     }`}
                 >
                   EN
@@ -360,8 +221,8 @@ export default function HomeClient({
                   type="button"
                   onClick={() => switchLang("fr")}
                   className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${lang === "fr"
-                      ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
-                      : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                    ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
+                    : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
                     }`}
                 >
                   FR
@@ -434,8 +295,8 @@ export default function HomeClient({
                     }`}
                   scroll={false}
                   className={`text-xs px-3 py-1 rounded-full border ${lang === "en"
-                      ? "border-slate-400 text-slate-900 dark:text-white"
-                      : "border-slate-300/60 text-slate-600 dark:text-slate-300"
+                    ? "border-slate-400 text-slate-900 dark:text-white"
+                    : "border-slate-300/60 text-slate-600 dark:text-slate-300"
                     }`}
                 >
                   EN
@@ -446,8 +307,8 @@ export default function HomeClient({
                     }`}
                   scroll={false}
                   className={`text-xs px-3 py-1 rounded-full border ${lang === "fr"
-                      ? "border-slate-400 text-slate-900 dark:text-white"
-                      : "border-slate-300/60 text-slate-600 dark:text-slate-300"
+                    ? "border-slate-400 text-slate-900 dark:text-white"
+                    : "border-slate-300/60 text-slate-600 dark:text-slate-300"
                     }`}
                 >
                   FR
@@ -472,79 +333,7 @@ export default function HomeClient({
         />
 
         {/* Services */}
-        <section id="services" className="relative isolate scroll-mt-24 py-10 sm:py-12">
-          <div className="px-4 sm:px-6 lg:px-8 space-y-8">
-            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
-              {t.services.title}
-            </h2>
-
-            <div className="grid gap-10 md:grid-cols-2 items-start">
-              <div className="space-y-4 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-                <p>
-                  {t.services.p1a}{" "}
-                  <ServiceWord
-                    id="websites"
-                    activeService={activeService}
-                    setActiveService={setActiveService}
-                  >
-                    {t.services.words.websites}
-                  </ServiceWord>{" "}
-                  {t.services.p1b}{" "}
-                  <ServiceWord
-                    id="service-businesses"
-                    activeService={activeService}
-                    setActiveService={setActiveService}
-                  >
-                    {t.services.words.serviceBusinesses}
-                  </ServiceWord>
-                  {t.services.p1c}{" "}
-                  <ServiceWord
-                    id="bilingual"
-                    activeService={activeService}
-                    setActiveService={setActiveService}
-                  >
-                    {t.services.words.bilingual}
-                  </ServiceWord>{" "}
-                  {t.services.p1d}{" "}
-                  <ServiceWord
-                    id="seo"
-                    activeService={activeService}
-                    setActiveService={setActiveService}
-                  >
-                    {t.services.words.seo}
-                  </ServiceWord>
-                  {t.services.p1e}{" "}
-                  <ServiceWord
-                    id="photography"
-                    activeService={activeService}
-                    setActiveService={setActiveService}
-                  >
-                    {t.services.words.photography}
-                  </ServiceWord>{" "}
-                  {t.services.p1f}
-                </p>
-
-                <p>
-                  {t.services.p2a}{" "}
-                  <ServiceWord
-                    id="automation"
-                    activeService={activeService}
-                    setActiveService={setActiveService}
-                  >
-                    {t.services.words.automation}
-                  </ServiceWord>{" "}
-                  {t.services.p2b}
-                </p>
-
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {t.services.hint}
-                </p>
-              </div>
-
-              <ServiceDetailPanel activeService={activeService} t={t} />
-            </div>
-          </div>
-        </section>
+       <ServicesSection t={t} />
 
         {/* Products */}
         <section id="products" className="relative isolate py-10 sm:py-12">

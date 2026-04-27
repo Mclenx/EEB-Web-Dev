@@ -234,22 +234,69 @@ const en = {
 
   services: {
     title: "Services",
-    hint: "Hover or tap the highlighted terms to see more details.",
-    p1a: "I design and build",
-    p1b: "that feel clean and modern, tailored for",
-    p1c: ", artisans, and local shops. I can structure and adapt your",
-    p1d: "in English and French, take care of",
-    p1e: ", and even help with",
-    p1f: "when needed.",
-    p2a: "For owners who want things to “just work”, I also set up simple",
-    p2b: "so form submissions go straight to your email, Notion, or other tools you use every day.",
-    words: {
-      websites: "websites",
-      serviceBusinesses: "service businesses",
-      bilingual: "bilingual content",
-      seo: "SEO & performance",
-      photography: "basic photography & visuals",
-      automation: "automations",
+    headline: "Websites built for clarity, trust, and better lead flow.",
+    intro:
+      "I design and build websites for service businesses that need more than a good-looking layout. Each project is structured to guide visitors clearly, present the business with confidence, and make it easier to turn traffic into real inquiries.",
+    hint: "Hover or tap a service to preview how it can take shape on a real project.",
+    items: {
+      webDesign: {
+        title: "Web design & development",
+        description:
+          "Clean, responsive websites built around structure, usability, and presentation.",
+        tag: "Core service",
+        showcaseTitle: "Web design & development",
+        showcaseText:
+          "Clear layout, strong visual hierarchy, and responsive structure built to guide visitors toward action.",
+      },
+      bilingual: {
+        title: "Bilingual content integration",
+        description:
+          "English and French content adapted for a clear, consistent experience.",
+        tag: "Language-ready",
+        showcaseTitle: "Bilingual content integration",
+        showcaseText:
+          "English and French content planned to feel natural, consistent, and easy to navigate across the full site.",
+      },
+      seoPerformance: {
+        title: "SEO & performance foundations",
+        description:
+          "Fast-loading pages and strong technical basics that support visibility online.",
+        tag: "Foundations",
+        showcaseTitle: "SEO & performance foundations",
+        showcaseText:
+          "Fast pages, clean structure, and technical essentials that support visibility and usability.",
+      },
+      automation: {
+        title: "Automation & lead flow",
+        description:
+          "Forms and workflows connected to the tools you already use every day.",
+        tag: "Workflow",
+        showcaseTitle: "Automation & lead flow",
+        showcaseText:
+          "Form submissions routed cleanly into email, Notion, or other tools so inquiries are easier to manage.",
+      },
+      visualDirection: {
+        title: "Visual direction",
+        description:
+          "Photography, layout, and presentation choices that strengthen trust.",
+        tag: "Presentation",
+        showcaseTitle: "Visual direction",
+        showcaseText:
+          "Photography, layout, and supporting visuals shaped to make the business feel more polished and trustworthy.",
+      },
+    },
+    labels: {
+      preview: "Preview",
+      activeView: "Active view",
+      focus: "Focus",
+      structure: "Structure",
+      outcome: "Outcome",
+    },
+    details: {
+      structure:
+        "Clear hierarchy, cleaner flow, and stronger presentation.",
+      outcome:
+        "A site that feels more intentional and easier to act on.",
     },
   },
 
@@ -510,22 +557,70 @@ const fr: TContent = {
 
   services: {
     title: "Services",
-    hint: "Survolez ou touchez les termes pour voir plus de détails.",
-    p1a: "Je conçois et développe des",
-    p1b: "propres et modernes, adaptées aux",
-    p1c: ", artisans et commerces locaux. Je peux structurer et adapter votre",
-    p1d: "en anglais et en français, m’occuper du",
-    p1e: ", et même aider avec",
-    p1f: "si nécessaire.",
-    p2a: "Pour les propriétaires qui veulent que tout “fonctionne simplement”, je peux aussi mettre en place des",
-    p2b: "afin que les formulaires arrivent directement par courriel, dans Notion ou vos outils du quotidien.",
-    words: {
-      websites: "sites web",
-      serviceBusinesses: "entreprises de service",
-      bilingual: "contenu bilingue",
-      seo: "SEO et performance",
-      photography: "photographie et visuels",
-      automation: "automatisations",
+    headline:
+      "Des sites conçus pour inspirer confiance, guider clairement, et générer plus de demandes.",
+    intro:
+      "Je conçois des sites web pour les entreprises de service qui ont besoin de plus qu’une belle apparence. Chaque projet est structuré pour guider les visiteurs clairement, bien présenter l’entreprise, et faciliter le passage entre la visite et la prise de contact.",
+    hint: "Survolez ou touchez un service pour voir un aperçu plus concret.",
+    items: {
+      webDesign: {
+        title: "Conception & développement web",
+        description:
+          "Des sites propres, responsive et pensés autour de la structure, de la clarté et de la présentation.",
+        tag: "Service principal",
+        showcaseTitle: "Conception & développement web",
+        showcaseText:
+          "Une mise en page claire, une hiérarchie visuelle solide, et une structure responsive pensée pour guider vers l’action.",
+      },
+      bilingual: {
+        title: "Intégration de contenu bilingue",
+        description:
+          "Un contenu anglais et français adapté pour une expérience claire, cohérente et naturelle.",
+        tag: "Bilingue",
+        showcaseTitle: "Intégration de contenu bilingue",
+        showcaseText:
+          "Un contenu anglais et français organisé pour rester naturel, cohérent et simple à parcourir.",
+      },
+      seoPerformance: {
+        title: "Bases SEO & performance",
+        description:
+          "Des pages rapides et des fondations techniques solides pour mieux soutenir la visibilité en ligne.",
+        tag: "Fondations",
+        showcaseTitle: "Bases SEO & performance",
+        showcaseText:
+          "Des pages rapides, une structure propre et les essentiels techniques pour soutenir la visibilité et l’expérience.",
+      },
+      automation: {
+        title: "Automatisation & gestion des demandes",
+        description:
+          "Des formulaires et systèmes connectés à vos outils du quotidien.",
+        tag: "Flux de travail",
+        showcaseTitle: "Automatisation & gestion des demandes",
+        showcaseText:
+          "Des formulaires reliés proprement à votre courriel, Notion ou vos outils pour mieux gérer les demandes entrantes.",
+      },
+      visualDirection: {
+        title: "Direction visuelle",
+        description:
+          "Photographie, mise en page et présentation pensées pour renforcer la confiance.",
+        tag: "Présentation",
+        showcaseTitle: "Direction visuelle",
+        showcaseText:
+          "Photographie, mise en page et visuels pensés pour rendre l’entreprise plus soignée et plus crédible.",
+      },
+    },
+    labels: {
+      preview: "Aperçu",
+      activeView: "Vue active",
+      focus: "Focus",
+      structure: "Structure",
+      outcome: "Résultat",
+    },
+    details: {
+      structure:
+        "Clear hierarchy, cleaner flow, and stronger presentation.",
+      outcome:
+        "A site that feels more intentional and easier to act on.",
     },
   },
 
