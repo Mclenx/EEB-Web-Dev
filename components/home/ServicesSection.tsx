@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import { serviceIcons } from "./serviceIcons";
 
 type ServicesSectionProps = {
@@ -170,10 +170,73 @@ type ServiceDetailPanelProps = {
 };
 
 function ServiceDetailPanel({ activeService, t }: ServiceDetailPanelProps) {
-    const service = getServiceItems(t)[activeService];
+    const services = getServiceItems(t);
+    const activeIndex = serviceOrder.indexOf(activeService);
 
-    const rearCardBase =
-        "pointer-events-none absolute inset-x-6 top-0 h-full rounded-[1.9rem] border backdrop-blur-lg";
+    const cardBase =
+        "absolute inset-x-6 top-0 h-full overflow-hidden rounded-[1.9rem] border backdrop-blur-lg transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
+
+    const stackStyles = [
+        {
+            transform: "translate3d(0, 0, 0) rotate(0deg) scale(1)",
+            zIndex: 30,
+            opacity: 1,
+            visual:
+                "border-slate-200/90 bg-white/[0.92] shadow-[0_26px_55px_-24px_rgba(15,23,42,0.22),0_10px_24px_-20px_rgba(15,23,42,0.14)] dark:border-slate-600 dark:bg-slate-950",
+        },
+        {
+            transform: "translate3d(-1.15rem, 0.45rem, 0) rotate(-2.5deg) scale(0.985)",
+            zIndex: 18,
+            opacity: 0.82,
+            visual:
+                "border-slate-200/95 bg-white/[0.86] shadow-[0_20px_34px_-22px_rgba(15,23,42,0.20)] dark:border-white/[0.12] dark:bg-sky-300/[0.045]",
+        },
+        {
+            transform: "translate3d(1.35rem, -0.45rem, 0) rotate(2.25deg) scale(0.975)",
+            zIndex: 16,
+            opacity: 0.68,
+            visual:
+                "border-slate-200/95 bg-white/[0.82] shadow-[0_18px_32px_-22px_rgba(15,23,42,0.20)] dark:border-white/[0.09] dark:bg-sky-400/[0.035]",
+        },
+        {
+            transform: "translate3d(-1.85rem, 1.05rem, 0) rotate(-3.75deg) scale(0.965)",
+            zIndex: 14,
+            opacity: 0.52,
+            visual:
+                "border-slate-200/95 bg-white/[0.78] shadow-[0_16px_30px_-22px_rgba(15,23,42,0.18)] dark:border-white/[0.07] dark:bg-sky-300/[0.025]",
+        },
+        {
+            transform: "translate3d(2.15rem, 1.45rem, 0) rotate(4.25deg) scale(0.955)",
+            zIndex: 12,
+            opacity: 0.38,
+            visual:
+                "border-slate-200/90 bg-white/[0.82] shadow-[0_14px_28px_-22px_rgba(15,23,42,0.16)] dark:border-white/[0.05] dark:bg-white/[0.018]",
+        },
+    ] satisfies {
+        transform: string;
+        zIndex: number;
+        opacity: number;
+        visual: string;
+    }[];
+
+    const getCardPosition = (serviceId: ServiceId) => {
+        const serviceIndex = serviceOrder.indexOf(serviceId);
+        const deckPosition =
+            (serviceIndex - activeIndex + serviceOrder.length) % serviceOrder.length;
+        const stackStyle = stackStyles[deckPosition];
+
+        return {
+            deckPosition,
+            isActive: deckPosition === 0,
+            className: stackStyle.visual,
+            style: {
+                opacity: stackStyle.opacity,
+                pointerEvents: deckPosition === 0 ? "auto" : "none",
+                transform: stackStyle.transform,
+                zIndex: stackStyle.zIndex,
+            } satisfies CSSProperties,
+        };
+    };
 
     return (
         <div className="relative mx-auto w-full max-w-xl overflow-visible">
@@ -205,60 +268,74 @@ function ServiceDetailPanel({ activeService, t }: ServiceDetailPanelProps) {
                     </div>
                 </div>
 
-                {/* BACK CARD 4 - deepest */}
-                <div
-                    className={`${rearCardBase} z-[4] translate-x-6 translate-y-5 rotate-[3.25deg] border-slate-200/90 bg-white/[0.82] shadow-[0_14px_28px_-22px_rgba(15,23,42,0.16)] dark:border-white/[0.05] dark:bg-white/[0.018]`}
-                />
+                {serviceOrder.map((serviceId) => {
+                    const service = services[serviceId];
+                    const cardPosition = getCardPosition(serviceId);
 
-                {/* BACK CARD 3 */}
-                <div
-                    className={`${rearCardBase} z-[6] -translate-x-5 translate-y-3 rotate-[-2.75deg] border-slate-200/95 bg-white/[0.78] shadow-[0_16px_30px_-22px_rgba(15,23,42,0.18)] dark:border-white/[0.07] dark:bg-sky-300/[0.025]`}
-                />
+                    return (
+                        <div
+                            key={serviceId}
+                            aria-hidden={!cardPosition.isActive}
+                            className={`${cardBase} ${cardPosition.className}`}
+                            style={cardPosition.style}
+                        >
+                            <div className="relative flex h-full flex-col px-6 pt-8 pb-6">
+                                {/* DARK MODE REFLECTION */}
+                                <div
+                                    className={[
+                                        "pointer-events-none absolute inset-x-10 top-0 hidden h-16 rounded-full bg-sky-200/14 blur-2xl transition-opacity duration-500 motion-reduce:transition-none dark:block",
+                                        cardPosition.isActive ? "opacity-100" : "opacity-35",
+                                    ].join(" ")}
+                                />
 
-                {/* BACK CARD 2 */}
-                <div
-                    className={`${rearCardBase} z-[8] translate-x-4 -translate-y-1 rotate-[1.75deg] border-slate-200/95 bg-white/[0.82] shadow-[0_18px_32px_-22px_rgba(15,23,42,0.20)] dark:border-white/[0.09] dark:bg-sky-400/[0.035]`}
-                />
+                                <div
+                                    className={[
+                                        "transition-opacity duration-500 motion-reduce:transition-none",
+                                        cardPosition.isActive ? "opacity-100" : "opacity-35",
+                                    ].join(" ")}
+                                >
+                                    {/* HEADER */}
+                                    <div className="mb-6">
+                                        <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
+                                            {service.tag}
+                                        </p>
+                                    </div>
 
+                                    {/* TITLE */}
+                                    <h3
+                                        className={[
+                                            "text-center font-semibold text-slate-900 dark:text-white",
+                                            cardPosition.isActive ? "text-lg" : "text-base",
+                                        ].join(" ")}
+                                    >
+                                        {service.showcaseTitle}
+                                    </h3>
+                                </div>
 
-                {/* BACK CARD 1 - closest rear */}
-                <div
-                    className={`${rearCardBase} z-[10] -translate-x-3 translate-y-1 rotate-[-1.25deg] border-slate-200/95 bg-white/[0.86] shadow-[0_20px_34px_-22px_rgba(15,23,42,0.20)] dark:border-white/[0.12] dark:bg-sky-300/[0.045]`}
-                />
+                                <div
+                                    className={[
+                                        "mt-4 mb-5 flex justify-center transition-opacity duration-500 motion-reduce:transition-none",
+                                        cardPosition.isActive ? "opacity-100" : "opacity-20",
+                                    ].join(" ")}
+                                >
+                                    <div className="relative h-px w-40">
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-300/70 to-transparent dark:via-white/12" />
+                                        <div className="absolute left-1/2 top-1/2 h-px w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-slate-300/60 blur-[0.4px] dark:bg-white/[0.18]" />
+                                    </div>
+                                </div>
 
-                {/* ACTIVE CARD */}
-                <div className="relative z-20 mx-6 h-full rounded-[1.9rem] border border-slate-200/90 bg-white/[0.92] shadow-[0_26px_55px_-24px_rgba(15,23,42,0.22),0_10px_24px_-20px_rgba(15,23,42,0.14)] dark:border-slate-600 dark:bg-slate-950">
-                    <div className="relative px-6 pt-8 pb-6 ">
-                        {/* DARK MODE REFLECTION */}
-                        <div className="pointer-events-none absolute inset-x-10 top-0 hidden h-16 rounded-full bg-sky-200/14 blur-2xl dark:block" />
-
-
-                        {/* HEADER */}
-                        <div className="mb-6">
-                            <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
-                                {service.tag}
-                            </p>
-                        </div>
-
-                        {/* TITLE */}
-                        <h3 className="text-lg font-semibold text-center text-slate-900 dark:text-white">
-                            {service.showcaseTitle}
-                        </h3>
-                        {/* Micro Divider */}
-                        <div className="mt-4 mb-5 flex justify-center">
-                            <div className="relative h-px w-40">
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-300/70 to-transparent dark:via-white/12" />
-                                <div className="absolute left-1/2 top-1/2 h-px w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-slate-300/60 blur-[0.4px] dark:bg-white/[0.18]" />
+                                <p
+                                    className={[
+                                        "mx-auto max-w-[30ch] text-center text-sm leading-relaxed text-slate-600 transition-opacity duration-500 motion-reduce:transition-none dark:text-slate-300",
+                                        cardPosition.isActive ? "opacity-100" : "opacity-0",
+                                    ].join(" ")}
+                                >
+                                    {service.showcaseText}
+                                </p>
                             </div>
                         </div>
-
-                        {/* DESCRIPTION */}
-                        <p className="mx-auto max-w-[30ch] text-center text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                            {service.showcaseText}
-                        </p>
-
-                    </div>
-                </div>
+                    );
+                })}
             </div>
         </div>
     );
