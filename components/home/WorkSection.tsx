@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import type { TContent } from "@/app/lib/content";
 
-function LeadGenFlow({ t }: { t: any }) {
+function LeadGenFlow({ t }: { t: TContent }) {
   return (
     <div className="h-full w-full p-4">
       <div className="flex items-center justify-between mb-3">
@@ -21,7 +22,6 @@ function LeadGenFlow({ t }: { t: any }) {
           subtitle={t.leadFlow.nodes.visitor.subtitle}
           icon="👤"
         />
-        ...
         <FlowArrow />
         <FlowNode
           title={t.leadFlow.nodes.landing.title}
@@ -145,9 +145,7 @@ export function ScoreLoop({
 
 
 type WorkSectionProps = {
-  t: any;
-  activeCaseStudy: string | null;
-  setActiveCaseStudy: React.Dispatch<React.SetStateAction<string | null>>;
+  t: TContent;
 };
 
 type WorkCardProps = {
@@ -247,11 +245,8 @@ function WorkCard({
   );
 }
 
-export function WorkSection({
-  t,
-  activeCaseStudy,
-  setActiveCaseStudy,
-}: WorkSectionProps) {
+export function WorkSection({ t }: WorkSectionProps) {
+  const [activeCaseStudy, setActiveCaseStudy] = useState<string | null>(null);
 
   const activeWorkItem =
     activeCaseStudy === "cryoair"

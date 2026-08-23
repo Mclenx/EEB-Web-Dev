@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import type { TContent } from "@/app/lib/content";
 
 type HeroProps = {
-  t: any;
+  t: TContent;
 };
 
 function TerminalCard({ lines }: { lines: string[] }) {

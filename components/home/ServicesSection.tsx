@@ -2,9 +2,10 @@
 
 import { type CSSProperties, useState } from "react";
 import { serviceIcons } from "./serviceIcons";
+import type { TContent } from "@/app/lib/content";
 
 type ServicesSectionProps = {
-    t: any;
+    t: TContent;
 };
 
 
@@ -24,7 +25,7 @@ const serviceOrder: ServiceId[] = [
 ];
 
 
-function getServiceItems(t: any): Record<
+function getServiceItems(t: TContent): Record<
     ServiceId,
     {
         title: string;
@@ -48,7 +49,6 @@ type ServiceListItemProps = {
     };
     activeService: ServiceId;
     setActiveService: (id: ServiceId) => void;
-    t: any;
 };
 
 function ServiceListItem({
@@ -56,7 +56,6 @@ function ServiceListItem({
     service,
     activeService,
     setActiveService,
-    t,
 }: ServiceListItemProps) {
     const isActive = activeService === id;
     const Icon = serviceIcons[id];
@@ -85,24 +84,15 @@ function ServiceListItem({
                                 : "border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-800/60",
                         ].join(" ")}
                     >
-                        <div
+                        <Icon
+                            strokeWidth={1.75}
                             className={[
-                                "mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-300",
+                                "h-[18px] w-[18px] transition-all duration-300",
                                 isActive
-                                    ? "border-slate-300 bg-slate-100 dark:border-slate-900/10 dark:bg-slate-900/10"
-                                    : "border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-800/60",
+                                    ? "text-slate-700 dark:text-slate-800"
+                                    : "text-slate-600 opacity-85 group-hover:opacity-100 dark:text-slate-300",
                             ].join(" ")}
-                        >
-                            <Icon
-                                strokeWidth={1.75}
-                                className={[
-                                    "h-[18px] w-[18px] transition-all duration-300",
-                                    isActive
-                                        ? "text-slate-700 dark:text-slate-800"
-                                        : "text-slate-600 opacity-85 group-hover:opacity-100 dark:text-slate-300",
-                                ].join(" ")}
-                            />
-                        </div>
+                        />
                     </div>
 
                     <div className="min-w-0 flex-1">
@@ -166,7 +156,7 @@ function ServiceListItem({
 
 type ServiceDetailPanelProps = {
     activeService: ServiceId;
-    t: any;
+    t: TContent;
 };
 
 function ServiceDetailPanel({ activeService, t }: ServiceDetailPanelProps) {
@@ -395,7 +385,6 @@ export function ServicesSection({ t }: ServicesSectionProps) {
                                             service={service}
                                             activeService={activeService}
                                             setActiveService={setActiveService}
-                                            t={t}
                                         />
                                     );
                                 })}
