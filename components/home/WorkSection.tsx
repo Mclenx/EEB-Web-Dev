@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Image from "next/image";
 import type { TContent } from "@/app/lib/content";
 
@@ -148,8 +148,86 @@ type WorkSectionProps = {
   t: TContent;
 };
 
+export type WorkProjectId =
+  | "cryoair"
+  | "systemkit"
+  | "leadgen"
+  | "seoAuditor";
+
+type WorkProjectTier = "featured" | "supporting";
+type WorkMediaType = "screenshot" | "systemKit" | "leadGen" | "seoScore";
+
+type WorkProjectDefinition = {
+  id: WorkProjectId;
+  tier: WorkProjectTier;
+  media: WorkMediaType;
+  hasExtendedCaseStudy: boolean;
+};
+
+const workProjects: readonly WorkProjectDefinition[] = [
+  {
+    id: "cryoair",
+    tier: "featured",
+    media: "screenshot",
+    hasExtendedCaseStudy: true,
+  },
+  {
+    id: "systemkit",
+    tier: "supporting",
+    media: "systemKit",
+    hasExtendedCaseStudy: false,
+  },
+  {
+    id: "leadgen",
+    tier: "supporting",
+    media: "leadGen",
+    hasExtendedCaseStudy: false,
+  },
+  {
+    id: "seoAuditor",
+    tier: "supporting",
+    media: "seoScore",
+    hasExtendedCaseStudy: false,
+  },
+];
+
+const mediaRenderers: Record<WorkMediaType, (t: TContent) => ReactNode> = {
+  screenshot: () => (
+    <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
+      <Image
+        src="/work/cryoair-homepage.png"
+        alt="Cryo-Air homepage screenshot"
+        fill
+        className="object-cover"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+      />
+    </div>
+  ),
+  systemKit: () => (
+    <div className="flex aspect-video items-center justify-center rounded-xl border border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
+      <div className="rounded-xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-950/50 dark:text-slate-200">
+        Reusable structure · SEO-ready · Conversion-focused
+      </div>
+    </div>
+  ),
+  leadGen: (t) => (
+    <div className="aspect-video overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
+      <div className="h-full w-full">
+        <LeadGenFlow t={t} />
+      </div>
+    </div>
+  ),
+  seoScore: () => (
+    <div className="relative aspect-video overflow-hidden rounded-xl bg-slate-200/60 p-2 dark:bg-slate-800/30">
+      <ScoreLoop
+        label="SEO audit"
+        caption="Technical issues surfaced clearly"
+      />
+    </div>
+  ),
+};
+
 type WorkCardProps = {
-  id: string;
   title: string;
   desc: string;
   meta: string;
@@ -245,19 +323,153 @@ function WorkCard({
   );
 }
 
-export function WorkSection({ t }: WorkSectionProps) {
-  const [activeCaseStudy, setActiveCaseStudy] = useState<string | null>(null);
+type ExtendedCaseStudyProps = {
+  t: TContent;
+  onClose: () => void;
+};
 
-  const activeWorkItem =
-    activeCaseStudy === "cryoair"
-      ? t.work.cryoair
-      : activeCaseStudy === "systemkit"
-        ? t.work.systemkit
-        : activeCaseStudy === "leadgen"
-          ? t.work.leadgen
-          : activeCaseStudy === "seoAuditor"
-            ? t.work.seoAuditor
-            : null;
+function CryoAirCaseStudy({ t, onClose }: ExtendedCaseStudyProps) {
+  return (
+    <section id="cryoair" className="max-w-3xl space-y-8">
+      <h2 className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">
+        {t.work.cryoair.caseTitle}
+      </h2>
+
+      <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+        {t.work.cryoair.p1}
+      </p>
+
+      <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+        {t.work.cryoair.p2}
+      </p>
+
+      <div className="space-y-2">
+        <div className="relative aspect-video overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
+          <Image
+            src="/work/cryoair-shoppage.png"
+            alt="Cryo-Air product catalog screenshot"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 768px"
+          />
+        </div>
+        <p className="text-xs text-slate-500 dark:text-slate-400">
+          {t.work.cryoair.shotCaption}
+        </p>
+      </div>
+
+      <div className="grid gap-6 text-sm md:grid-cols-2">
+        <div className="space-y-1">
+          <p className="font-semibold text-slate-900 dark:text-white">
+            {t.work.cryoair.roleLabel}
+          </p>
+          <p className="text-slate-600 dark:text-slate-400">
+            {t.work.cryoair.roleText}
+          </p>
+        </div>
+
+        <div className="space-y-1">
+          <p className="font-semibold text-slate-900 dark:text-white">
+            {t.work.cryoair.toolsLabel}
+          </p>
+          <p className="text-slate-600 dark:text-slate-400">
+            {t.work.cryoair.toolsText}
+          </p>
+        </div>
+
+        <div className="space-y-1">
+          <p className="font-semibold text-slate-900 dark:text-white">
+            {t.work.cryoair.resultLabel}
+          </p>
+          <p className="text-slate-600 dark:text-slate-400">
+            {t.work.cryoair.resultText}
+          </p>
+        </div>
+
+        <div className="space-y-1">
+          <p className="font-semibold text-slate-900 dark:text-white">
+            {t.work.cryoair.statusLabel}
+          </p>
+          <p className="text-slate-600 dark:text-slate-400">
+            {t.work.cryoair.statusText}
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <h3 className="text-sm font-semibold text-slate-900 dark:text-white">
+          {t.work.cryoair.approachTitle}
+        </h3>
+        <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+          {t.work.cryoair.approachP}
+        </p>
+        <p className="text-xs text-slate-500 dark:text-slate-400">
+          {t.work.cryoair.approachNote}
+        </p>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <button
+          type="button"
+          onClick={onClose}
+          className="text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+        >
+          {t.work.cryoair.close}
+        </button>
+      </div>
+    </section>
+  );
+}
+
+const extendedCaseStudyRenderers: Partial<
+  Record<WorkProjectId, (props: ExtendedCaseStudyProps) => ReactNode>
+> = {
+  cryoair: (props) => <CryoAirCaseStudy {...props} />,
+};
+
+export function WorkSection({ t }: WorkSectionProps) {
+  const [activeCaseStudy, setActiveCaseStudy] =
+    useState<WorkProjectId | null>(null);
+  const featuredProjects = workProjects.filter(
+    (project) => project.tier === "featured",
+  );
+  const supportingProjects = workProjects.filter(
+    (project) => project.tier === "supporting",
+  );
+  const hasFeaturedRow = featuredProjects.length > 1;
+  const activeProject = activeCaseStudy
+    ? workProjects.find((project) => project.id === activeCaseStudy)
+    : undefined;
+  const activeWorkItem = activeProject ? t.work[activeProject.id] : null;
+  const renderExtendedCaseStudy =
+    activeProject?.hasExtendedCaseStudy && activeCaseStudy
+      ? extendedCaseStudyRenderers[activeCaseStudy]
+      : undefined;
+
+  function renderProjectCard(project: WorkProjectDefinition) {
+    const content = t.work[project.id];
+
+    return (
+      <WorkCard
+        key={project.id}
+        title={content.title}
+        desc={content.desc}
+        meta={content.meta}
+        footer={content.footer}
+        details={content.details}
+        labels={t.work.detailLabels}
+        isOpen={activeCaseStudy === project.id}
+        onToggle={() =>
+          setActiveCaseStudy((previous) =>
+            previous === project.id ? null : project.id,
+          )
+        }
+        expandLabel={t.work.expandLabel}
+        collapseLabel={t.work.collapseLabel}
+        media={mediaRenderers[project.media](t)}
+      />
+    );
+  }
 
   return (
     <>
@@ -287,109 +499,20 @@ export function WorkSection({ t }: WorkSectionProps) {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <WorkCard
-              id="cryoair"
-              title={t.work.cryoair.title}
-              desc={t.work.cryoair.desc}
-              meta={t.work.cryoair.meta}
-              footer={t.work.cryoair.footer}
-              details={t.work.cryoair.details}
-              labels={t.work.detailLabels}
-              isOpen={activeCaseStudy === "cryoair"}
-              onToggle={() =>
-                setActiveCaseStudy((prev) => (prev === "cryoair" ? null : "cryoair"))
-              }
-
-              expandLabel={t.work.expandLabel}
-              collapseLabel={t.work.collapseLabel}
-              media={
-                <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
-                  <Image
-                    src="/work/cryoair-homepage.png"
-                    alt="Cryo-Air homepage screenshot"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                </div>
-              }
-            />
-
-            <WorkCard
-              id="systemkit"
-              title={t.work.systemkit.title}
-              desc={t.work.systemkit.desc}
-              meta={t.work.systemkit.meta}
-              footer={t.work.systemkit.footer}
-              details={t.work.systemkit.details}
-              labels={t.work.detailLabels}
-              isOpen={activeCaseStudy === "systemkit"}
-              onToggle={() =>
-                setActiveCaseStudy((prev) =>
-                  prev === "systemkit" ? null : "systemkit",
-                )
-              }
-              expandLabel={t.work.expandLabel}
-              collapseLabel={t.work.collapseLabel}
-              media={
-                <div className="flex aspect-video items-center justify-center rounded-xl border border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
-                  <div className="rounded-xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-950/50 dark:text-slate-200">
-                    Reusable structure · SEO-ready · Conversion-focused
-                  </div>
-                </div>
-              }
-            />
-
-            <WorkCard
-              id="leadgen"
-              title={t.work.leadgen.title}
-              desc={t.work.leadgen.desc}
-              meta={t.work.leadgen.meta}
-              footer={t.work.leadgen.footer}
-              details={t.work.leadgen.details}
-              labels={t.work.detailLabels}
-              isOpen={activeCaseStudy === "leadgen"}
-              onToggle={() =>
-                setActiveCaseStudy((prev) => (prev === "leadgen" ? null : "leadgen"))
-              }
-              expandLabel={t.work.expandLabel}
-              collapseLabel={t.work.collapseLabel}
-              media={
-                <div className="aspect-video overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
-                  <div className="h-full w-full">
-                    <LeadGenFlow t={t} />
-                  </div>
-                </div>
-              }
-            />
-
-            <WorkCard
-              id="seoAuditor"
-              title={t.work.seoAuditor.title}
-              desc={t.work.seoAuditor.desc}
-              meta={t.work.seoAuditor.meta}
-              footer={t.work.seoAuditor.footer}
-              details={t.work.seoAuditor.details}
-              labels={t.work.detailLabels}
-              isOpen={activeCaseStudy === "seoAuditor"}
-              onToggle={() =>
-                setActiveCaseStudy((prev) =>
-                  prev === "seoAuditor" ? null : "seoAuditor",
-                )
-              }
-              expandLabel={t.work.expandLabel}
-              collapseLabel={t.work.collapseLabel}
-              media={
-                <div className="relative aspect-video overflow-hidden rounded-xl bg-slate-200/60 p-2 dark:bg-slate-800/30">
-                  <ScoreLoop
-                    label="SEO audit"
-                    caption="Technical issues surfaced clearly"
-                  />
-                </div>
-              }
-            />
-          </div>
+          {hasFeaturedRow ? (
+            <div className="mt-10 space-y-6">
+              <div className="grid gap-6 sm:grid-cols-2">
+                {featuredProjects.map(renderProjectCard)}
+              </div>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {supportingProjects.map(renderProjectCard)}
+              </div>
+            </div>
+          ) : (
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {workProjects.map(renderProjectCard)}
+            </div>
+          )}
 
           {activeWorkItem && (
             <div className="mt-10 rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 hidden md:block fade-up-soft">
@@ -449,96 +572,10 @@ export function WorkSection({ t }: WorkSectionProps) {
         </div>
       </section>
 
-      {activeCaseStudy === "cryoair" && (
-        <section id="cryoair" className="max-w-3xl space-y-8">
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">
-            {t.work.cryoair.caseTitle}
-          </h2>
-
-          <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-            {t.work.cryoair.p1}
-          </p>
-
-          <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-            {t.work.cryoair.p2}
-          </p>
-
-          <div className="space-y-2">
-            <div className="relative aspect-video overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
-              <Image
-                src="/work/cryoair-shoppage.png"
-                alt="Cryo-Air product catalog screenshot"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 768px"
-              />
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              {t.work.cryoair.shotCaption}
-            </p>
-          </div>
-
-          <div className="grid gap-6 text-sm md:grid-cols-2">
-            <div className="space-y-1">
-              <p className="font-semibold text-slate-900 dark:text-white">
-                {t.work.cryoair.roleLabel}
-              </p>
-              <p className="text-slate-600 dark:text-slate-400">
-                {t.work.cryoair.roleText}
-              </p>
-            </div>
-
-            <div className="space-y-1">
-              <p className="font-semibold text-slate-900 dark:text-white">
-                {t.work.cryoair.toolsLabel}
-              </p>
-              <p className="text-slate-600 dark:text-slate-400">
-                {t.work.cryoair.toolsText}
-              </p>
-            </div>
-
-            <div className="space-y-1">
-              <p className="font-semibold text-slate-900 dark:text-white">
-                {t.work.cryoair.resultLabel}
-              </p>
-              <p className="text-slate-600 dark:text-slate-400">
-                {t.work.cryoair.resultText}
-              </p>
-            </div>
-
-            <div className="space-y-1">
-              <p className="font-semibold text-slate-900 dark:text-white">
-                {t.work.cryoair.statusLabel}
-              </p>
-              <p className="text-slate-600 dark:text-slate-400">
-                {t.work.cryoair.statusText}
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">
-              {t.work.cryoair.approachTitle}
-            </h3>
-            <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-              {t.work.cryoair.approachP}
-            </p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              {t.work.cryoair.approachNote}
-            </p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setActiveCaseStudy(null)}
-              className="text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
-            >
-              {t.work.cryoair.close}
-            </button>
-          </div>
-        </section>
-      )}
+      {renderExtendedCaseStudy?.({
+        t,
+        onClose: () => setActiveCaseStudy(null),
+      })}
     </>
   );
 }
