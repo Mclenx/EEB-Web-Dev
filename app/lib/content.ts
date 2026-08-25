@@ -301,8 +301,30 @@ const en = {
   },
 
   about: {
-    title: "About",
-    text: "I’m Eric, a Montréal-based developer and photographer. I help small businesses modernize their online presence, especially when the content isn’t ready yet. I’m used to working with busy owners — I structure the project, send gentle reminders, and keep momentum as we build the site step by step. I don’t disappear after launch; I stay available to help update, adjust, and grow your site as your business evolves. For many businesses, that starts with a simple, well-structured single-page site — something clean, fast, and professional that can go live quickly and improve credibility right away.",
+    eyebrow: "ABOUT",
+    title: "EEB Web Dev",
+    headline:
+      "A practical web partner for businesses that need clarity—not unnecessary complexity.",
+    intro: [
+      "EEB Web Dev helps small businesses and service-based companies build a clearer, more credible presence online. Each project is shaped around the business itself: its priorities, customers, budget, and the way work actually gets done.",
+      "That might mean a focused website, a bilingual experience, stronger visual presentation, or simple systems that make inquiries easier to manage. The goal isn’t to add complexity. It’s to create something useful, understandable, and ready to grow with the business.",
+    ],
+    principles: [
+      {
+        title: "Practical recommendations",
+        text: "Every feature should earn its place. Decisions are guided by what will genuinely help the business, rather than adding technology for its own sake.",
+      },
+      {
+        title: "Direct collaboration",
+        text: "You work directly with the person planning, designing, and building the project. Communication stays clear, personal, and easy to follow.",
+      },
+      {
+        title: "Support beyond launch",
+        text: "A website’s needs can change as the business evolves. EEB Web Dev remains available for adjustments, continued improvements, and future growth.",
+      },
+    ],
+    founder:
+      "EEB Web Dev is independently run by Eric Boisvert, a Montréal-based developer and photographer. The work combines technical development, visual judgment, and a practical understanding of the realities small businesses face.",
   },
 
   contact: {
@@ -625,8 +647,30 @@ const fr: TContent = {
   },
 
   about: {
-    title: "À propos",
-    text: "Je m’appelle Eric, développeur et photographe basé à Montréal. J’aide les petites entreprises à moderniser leur présence en ligne, surtout lorsque le contenu n’est pas prêt. Je suis habitué aux propriétaires occupés — je structure le projet, envoie des rappels légers et garde l’élan pendant qu’on construit le site étape par étape. Après la mise en ligne, je reste disponible pour mettre à jour, ajuster et faire évoluer votre site au rythme de votre entreprise. Souvent, ça commence par un site une page simple et bien structuré — propre, rapide et professionnel — qui peut être en ligne rapidement et améliorer la crédibilité immédiatement.",
+    eyebrow: "À PROPOS",
+    title: "EEB Web Dev",
+    headline:
+      "Un partenaire web pragmatique pour les entreprises qui recherchent de la clarté, sans complexité inutile.",
+    intro: [
+      "EEB Web Dev aide les petites entreprises et les entreprises de services à bâtir une présence en ligne plus claire, plus crédible et mieux adaptée à leur réalité. Chaque projet est conçu en fonction de l’entreprise elle-même : ses priorités, sa clientèle, son budget et sa façon de travailler.",
+      "Il peut s’agir d’un site web ciblé, d’une expérience bilingue, d’une présentation visuelle plus soignée ou de systèmes simples qui facilitent la gestion des demandes. L’objectif n’est pas d’ajouter de la complexité, mais de créer quelque chose d’utile, de compréhensible et capable d’évoluer avec l’entreprise.",
+    ],
+    principles: [
+      {
+        title: "Des recommandations concrètes",
+        text: "Chaque élément doit avoir une raison d’être. Les décisions sont guidées par ce qui peut réellement aider l’entreprise, plutôt que par l’ajout de technologies superflues.",
+      },
+      {
+        title: "Une collaboration directe",
+        text: "Vous travaillez directement avec la personne qui planifie, conçoit et réalise votre projet. La communication demeure claire, humaine et facile à suivre.",
+      },
+      {
+        title: "Un soutien qui se poursuit",
+        text: "Les besoins d’un site web peuvent changer avec l’évolution de l’entreprise. EEB Web Dev demeure disponible pour les ajustements, les améliorations continues et les projets futurs.",
+      },
+    ],
+    founder:
+      "EEB Web Dev est une entreprise indépendante dirigée par Eric Boisvert, développeur et photographe établi à Montréal. Son approche combine le développement technique, le jugement visuel et une compréhension concrète des réalités auxquelles font face les petites entreprises.",
   },
 
   contact: {
