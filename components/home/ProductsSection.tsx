@@ -9,7 +9,7 @@ type ProductsSectionProps = {
 
 export function ProductsSection({ t, lang }: ProductsSectionProps) {
   return (
-    <section id="products" className="relative isolate py-10 sm:py-12">
+    <section id="products" className="relative isolate scroll-mt-24 py-10 sm:py-12">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -top-6 h-px
@@ -17,7 +17,7 @@ export function ProductsSection({ t, lang }: ProductsSectionProps) {
       dark:via-slate-700"
       />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
           <h2 className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
             {t.products.title}

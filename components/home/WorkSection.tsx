@@ -473,7 +473,7 @@ export function WorkSection({ t }: WorkSectionProps) {
 
   return (
     <>
-      <section id="work" className="relative isolate py-10 sm:py-12">
+      <section id="work" className="relative isolate scroll-mt-24 py-10 sm:py-12">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 -top-6 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-slate-700"

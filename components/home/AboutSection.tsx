@@ -3,7 +3,7 @@ import type { TContent } from "@/app/lib/content";
 export function AboutSection({ t }: { t: TContent }) {
   return (
     <section id="about" className="scroll-mt-24 py-12 sm:py-16">
-      <div className="px-4 sm:px-6 lg:px-8">
+      <div>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-slate-400 dark:text-slate-500">
             {t.about.eyebrow}

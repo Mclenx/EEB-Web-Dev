@@ -356,7 +356,7 @@ export function ServicesSection({ t }: ServicesSectionProps) {
                 />
             </div>
 
-            <div className="px-4 sm:px-6 lg:px-8">
+            <div>
                 <div className="grid gap-10 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)]">
                     <div className="max-w-2xl">
                         <div className="space-y-6">
