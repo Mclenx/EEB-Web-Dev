@@ -25,7 +25,7 @@ function ThemeToggle({ t }: { t: TContent }) {
     return (
       <span
         aria-hidden="true"
-        className="inline-flex items-center justify-center rounded-full border border-slate-300/60 bg-slate-100/70 px-3 py-1 text-xs text-slate-800 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100"
+        className="inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full border border-slate-300/60 bg-slate-100/70 px-3 text-xs text-slate-800 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100"
       >
         <span className="invisible">{`☀️ ${t.nav.themeToggle.light}`}</span>
       </span>
@@ -38,7 +38,7 @@ function ThemeToggle({ t }: { t: TContent }) {
     <button
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="inline-flex items-center justify-center rounded-full border border-slate-300/60 bg-slate-100/70 px-3 py-1 text-xs text-slate-800 hover:bg-slate-200 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-800"
+      className="inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full border border-slate-300/60 bg-slate-100/70 px-3 text-xs text-slate-800 hover:bg-slate-200 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-800"
       aria-label="Toggle theme"
     >
       {isDark ? `🌙 ${t.nav.themeToggle.dark}` : `☀️ ${t.nav.themeToggle.light}`}
@@ -77,7 +77,7 @@ export default function HomeClient({
             >
               {/*Logo placeholder*/}
               <div className="h-9 w-9 min-h-9 min-w-9 shrink-0 rounded-full bg-gradient-to-tr from-emerald-400 via-sky-400 to-indigo-500" />
-              <span className="text-sm uppercase tracking-[0.35em] text-slate-700 dark:text-slate-200">
+              <span className="hidden text-sm uppercase tracking-[0.35em] text-slate-700 dark:text-slate-200 sm:inline">
                 EEB Web Dev
               </span>
             </Link>
@@ -124,7 +124,7 @@ export default function HomeClient({
                 <button
                   type="button"
                   onClick={() => switchLang("en")}
-                  className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${lang === "en"
+                  className={`min-h-8 rounded-full px-3 transition-all duration-200 ease-out active:scale-[0.98] ${lang === "en"
                     ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
                     : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
                     }`}
@@ -135,7 +135,7 @@ export default function HomeClient({
                 <button
                   type="button"
                   onClick={() => switchLang("fr")}
-                  className={`rounded-full px-3 py-1 transition-all duration-200 ease-out active:scale-[0.98] ${lang === "fr"
+                  className={`min-h-8 rounded-full px-3 transition-all duration-200 ease-out active:scale-[0.98] ${lang === "fr"
                     ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
                     : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
                     }`}
@@ -148,7 +148,7 @@ export default function HomeClient({
             <button
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden inline-flex items-center justify-center rounded-full border border-slate-300/60 bg-slate-100/70 px-3 py-2 text-sm text-slate-800 hover:bg-slate-200 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-800"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-100/70 text-sm text-slate-800 hover:bg-slate-200 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-800 md:hidden"
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
             >
@@ -158,7 +158,7 @@ export default function HomeClient({
             <a
               href={`/${lang}#contact`}
               onClick={() => setMobileOpen(false)}
-              className="cta-primary inline-flex items-center rounded-full bg-emerald-400 px-4 py-1.5 text-sm font-medium text-slate-900 shadow transition hover:bg-emerald-300"
+              className="cta-primary hidden items-center rounded-full bg-emerald-400 px-4 py-1.5 text-sm font-medium text-slate-900 shadow transition hover:bg-emerald-300 sm:inline-flex"
             >
               {t.nav.cta}
             </a>
@@ -167,41 +167,49 @@ export default function HomeClient({
 
         {mobileOpen && (
           <div className="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur">
-            <nav className="mx-auto max-w-6xl px-4 py-4 flex flex-col gap-4 text-sm text-slate-700 dark:text-slate-200">
+            <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4 text-sm text-slate-700 dark:text-slate-200">
               <a
                 href={`/${lang}#work`}
                 onClick={() => setMobileOpen(false)}
-                className="hover:text-slate-900 dark:hover:text-white"
+                className="flex min-h-10 items-center py-2 hover:text-slate-900 dark:hover:text-white"
               >
                 {t.nav.work}
               </a>
               <a
                 href={`/${lang}#services`}
                 onClick={() => setMobileOpen(false)}
-                className="hover:text-slate-900 dark:hover:text-white"
+                className="flex min-h-10 items-center py-2 hover:text-slate-900 dark:hover:text-white"
               >
                 {t.nav.services}
               </a>
               <a
                 href={`/${lang}#products`}
                 onClick={() => setMobileOpen(false)}
-                className="hover:text-slate-900 dark:hover:text-white"
+                className="flex min-h-10 items-center py-2 hover:text-slate-900 dark:hover:text-white"
               >
                 {t.nav.products}
               </a>
               <a
                 href={`/${lang}#about`}
                 onClick={() => setMobileOpen(false)}
-                className="hover:text-slate-900 dark:hover:text-white"
+                className="flex min-h-10 items-center py-2 hover:text-slate-900 dark:hover:text-white"
               >
                 {t.nav.about}
               </a>
               <a
                 href={`/${lang}#contact`}
                 onClick={() => setMobileOpen(false)}
-                className="hover:text-slate-900 dark:hover:text-white"
+                className="flex min-h-10 items-center py-2 hover:text-slate-900 dark:hover:text-white"
               >
                 {t.nav.contact}
+              </a>
+
+              <a
+                href={`/${lang}#contact`}
+                onClick={() => setMobileOpen(false)}
+                className="cta-primary mt-2 inline-flex min-h-10 items-center justify-center rounded-full bg-emerald-400 px-4 py-2 text-sm font-medium text-slate-900 shadow transition hover:bg-emerald-300 sm:hidden"
+              >
+                {t.nav.cta}
               </a>
 
               <div className="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800 flex gap-2">
@@ -209,7 +217,7 @@ export default function HomeClient({
                   href={`/en${typeof window !== "undefined" ? window.location.hash : ""
                     }`}
                   scroll={false}
-                  className={`text-xs px-3 py-1 rounded-full border ${lang === "en"
+                  className={`inline-flex min-h-10 items-center rounded-full border px-3 text-xs ${lang === "en"
                     ? "border-slate-400 text-slate-900 dark:text-white"
                     : "border-slate-300/60 text-slate-600 dark:text-slate-300"
                     }`}
@@ -221,7 +229,7 @@ export default function HomeClient({
                   href={`/fr${typeof window !== "undefined" ? window.location.hash : ""
                     }`}
                   scroll={false}
-                  className={`text-xs px-3 py-1 rounded-full border ${lang === "fr"
+                  className={`inline-flex min-h-10 items-center rounded-full border px-3 text-xs ${lang === "fr"
                     ? "border-slate-400 text-slate-900 dark:text-white"
                     : "border-slate-300/60 text-slate-600 dark:text-slate-300"
                     }`}
