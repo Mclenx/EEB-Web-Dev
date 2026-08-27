@@ -12,17 +12,7 @@ function pickLang(acceptLanguage: string | null) {
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  if (pathname !== "/") {
-    const requestHeaders = new Headers(req.headers);
-    requestHeaders.set(
-      "x-document-lang",
-      pathname === "/fr" || pathname.startsWith("/fr/") ? "fr-CA" : "en",
-    );
-
-    return NextResponse.next({
-      request: { headers: requestHeaders },
-    });
-  }
+  if (pathname !== "/") return NextResponse.next();
 
   const lang = pickLang(req.headers.get("accept-language"));
   const url = req.nextUrl.clone();
@@ -31,5 +21,5 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/en/:path*", "/fr/:path*"],
+  matcher: ["/"],
 };

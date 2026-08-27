@@ -1,7 +1,18 @@
 // app/[lang]/layout.tsx
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "../globals.css";
+import { Providers } from "../providers";
 
 const baseUrl = "https://eebweb.dev";
+const inter = Inter({ subsets: ["latin"] });
+
+export const dynamicParams = false;
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export function generateStaticParams() {
   return [{ lang: "en" }, { lang: "fr" }];
@@ -27,8 +38,18 @@ export async function generateMetadata({
   const url = `${baseUrl}/${lang}`;
 
   return {
+    metadataBase: new URL(baseUrl),
     title,
     description,
+    icons: {
+      icon: [
+        { url: "/favicon-16 - 1.png", sizes: "16x16", type: "image/png" },
+        { url: "/favicon-32 - 1.png", sizes: "32x32", type: "image/png" },
+      ],
+    },
+    other: {
+      google: "notranslate",
+    },
     alternates: {
       canonical: url,
       languages: {
@@ -69,6 +90,14 @@ export default async function LangLayout({
   children: React.ReactNode;
   params: Promise<{ lang: string }>;
 }) {
-  await params;
-  return <>{children}</>;
+  const { lang } = await params;
+  const documentLang = lang === "fr" ? "fr-CA" : "en";
+
+  return (
+    <html lang={documentLang} suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
 }
