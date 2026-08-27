@@ -38,9 +38,6 @@ export function ProductsSection({ t, lang }: ProductsSectionProps) {
                 className="object-cover"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
-              <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700 backdrop-blur dark:text-emerald-200">
-                {t.products.kitV1.badge}
-              </div>
             </div>
 
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white">

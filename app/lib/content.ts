@@ -204,7 +204,6 @@ const en = {
 
 
     kitV1: {
-      badge: "Website kit",
       title: "Website System Kit v1",
       desc: "A clean, modern starter kit for service businesses — built to launch fast and expand later.",
       meta: "Kit • Next.js / Tailwind",
@@ -548,7 +547,6 @@ const fr: TContent = {
     back: "Retour",
 
     kitV1: {
-      badge: "Kit web",
       title: "Website System Kit v1",
       desc: "Un kit de départ propre et moderne pour entreprises de service — conçu pour lancer vite et évoluer ensuite.",
       meta: "Kit • Next.js / Tailwind",
