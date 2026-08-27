@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { content as siteContent } from "../lib/content";
 import type { TContent } from "../lib/content";
@@ -16,11 +16,16 @@ import { SiteFooter } from "@/components/home/SiteFooter";
 type Lang = "en" | "fr";
 type ContentMap = typeof siteContent;
 
+const subscribeToHydration = () => () => {};
+
 function ThemeToggle({ t }: { t: TContent }) {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    subscribeToHydration,
+    () => true,
+    () => false,
+  );
 
-  useEffect(() => setMounted(true), []);
   if (!mounted) {
     return (
       <span

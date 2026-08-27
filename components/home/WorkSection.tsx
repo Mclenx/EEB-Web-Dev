@@ -3,6 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import Image from "next/image";
 import type { TContent } from "@/app/lib/content";
+import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 function LeadGenFlow({ t }: { t: TContent }) {
   return (
@@ -97,21 +98,22 @@ export function ScoreLoop({
   label: string;
   caption: string;
 }) {
-  const [score, setScore] = useState<number | null>(null);
+  const reducedMotion = useReducedMotion();
+  const [score, setScore] = useState(72);
 
   useEffect(() => {
-    // Set a stable initial value after mount
-    setScore(72);
+    if (reducedMotion) return;
 
     const id = setInterval(() => {
       setScore((s) => {
-        const curr = typeof s === "number" ? s : 72;
-        return curr >= 98 ? 72 : curr + 1;
+        return s >= 98 ? 72 : s + 1;
       });
     }, 80);
 
     return () => clearInterval(id);
-  }, []);
+  }, [reducedMotion]);
+
+  const displayedScore = reducedMotion ? 98 : score;
 
   return (
     <div className="h-full w-full">
@@ -123,15 +125,15 @@ export function ScoreLoop({
 
           <div className="shrink-0 pr-2">
             <p className="text-2xl font-semibold text-slate-900 dark:text-white tabular-nums leading-none">
-              {score ?? "—"}
+              {displayedScore}
             </p>
           </div>
         </div>
 
         <div className="mt-3 h-2 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
           <div
-            className="h-full rounded-full bg-emerald-400 transition-[width] duration-300 ease-out"
-            style={{ width: `${score ?? 0}%` }}
+            className="h-full rounded-full bg-emerald-400 transition-[width] duration-300 ease-out motion-reduce:transition-none"
+            style={{ width: `${displayedScore}%` }}
           />
         </div>
 

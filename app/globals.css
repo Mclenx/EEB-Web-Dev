@@ -48,10 +48,24 @@
 
 /* Accessibility: respect Reduce Motion */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .hero-enter,
-  .hero-drift {
+  .hero-drift,
+  .fade-up-soft {
     animation: none !important;
     transform: none !important;
+  }
+
+  .animate-pulse {
+    animation: none !important;
   }
 }
 /* CTA: primary button microinteraction */
@@ -116,6 +130,17 @@
   .cta-link,
   .cta-arrow {
     transition: none !important;
+  }
+
+  .cta-primary,
+  .cta-primary:hover,
+  .cta-primary:active,
+  .cta-link:hover .cta-arrow {
+    transform: none !important;
+  }
+
+  html:focus-within {
+    scroll-behavior: auto;
   }
 }
 

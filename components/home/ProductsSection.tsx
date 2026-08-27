@@ -29,7 +29,7 @@ export function ProductsSection({ t, lang }: ProductsSectionProps) {
 
         <div className="mt-12 sm:mt-14 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {/* Website System Kit v1 */}
-          <article className="lg:col-start-2 rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 transition-transform transition-shadow duration-200 hover:-translate-y-0.5 hover:shadow-md">
+          <article className="lg:col-start-2 rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 transition-transform transition-shadow duration-200 hover:-translate-y-0.5 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none motion-reduce:hover:transform-none">
             <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/30">
               <Image
                 src="/products/website-system-v1.png"
@@ -66,7 +66,7 @@ export function ProductsSection({ t, lang }: ProductsSectionProps) {
           </article>
 
           {/* MVP1 (Coming soon) */}
-          <article className="lg:col-start-3 rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 transition-transform transition-shadow duration-200 hover:-translate-y-0.5 hover:shadow-md">
+          <article className="lg:col-start-3 rounded-2xl border border-slate-200 bg-white/80 p-5 flex flex-col gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 transition-transform transition-shadow duration-200 hover:-translate-y-0.5 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none motion-reduce:hover:transform-none">
             <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/30 flex items-center justify-center">
               <span className="text-xs tracking-wide text-slate-400 dark:text-slate-500 uppercase text-center px-4">
                 {t.products.mvp1.previewNote}

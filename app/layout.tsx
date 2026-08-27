@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -23,13 +24,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const requestHeaders = await headers();
+  const documentLang =
+    requestHeaders.get("x-document-lang") === "fr-CA" ? "fr-CA" : "en";
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={documentLang} suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>
@@ -42,7 +47,6 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
 };
-
 
 
 

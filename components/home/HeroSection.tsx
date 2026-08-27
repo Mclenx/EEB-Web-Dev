@@ -1,22 +1,26 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import type { TContent } from "@/app/lib/content";
+import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 type HeroProps = {
   t: TContent;
 };
 
 function TerminalCard({ lines }: { lines: string[] }) {
+  const reducedMotion = useReducedMotion();
   const [visibleLines, setVisibleLines] = useState<string[]>([]);
   const [currentLine, setCurrentLine] = useState(0);
   const [currentText, setCurrentText] = useState("");
 
   useEffect(() => {
-    if (currentLine >= lines.length) return;
+    if (reducedMotion || currentLine >= lines.length) return;
 
     const fullLine = lines[currentLine];
     let charIndex = 0;
+    let completion: ReturnType<typeof setTimeout> | undefined;
 
     const typing = setInterval(() => {
       charIndex += 1;
@@ -25,7 +29,7 @@ function TerminalCard({ lines }: { lines: string[] }) {
       if (charIndex >= fullLine.length) {
         clearInterval(typing);
 
-        setTimeout(() => {
+        completion = setTimeout(() => {
           setVisibleLines((prev) => [...prev, fullLine]);
           setCurrentText("");
           setCurrentLine((prev) => prev + 1);
@@ -33,8 +37,34 @@ function TerminalCard({ lines }: { lines: string[] }) {
       }
     }, 35);
 
-    return () => clearInterval(typing);
-  }, [currentLine, lines]);
+    return () => {
+      clearInterval(typing);
+      if (completion) clearTimeout(completion);
+    };
+  }, [currentLine, lines, reducedMotion]);
+
+  if (reducedMotion) {
+    return (
+      <div className="rounded-2xl border border-slate-200/80 bg-white/75 shadow-lg backdrop-blur dark:border-slate-800 dark:bg-slate-950/55">
+        <div className="flex items-center gap-2 border-b border-slate-200/80 px-4 py-3 dark:border-slate-800">
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+          <span className="h-2.5 w-2.5 rounded-full bg-sky-400" />
+          <span className="h-2.5 w-2.5 rounded-full bg-indigo-400" />
+          <p className="ml-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+            site-analysis
+          </p>
+        </div>
+        <div className="min-h-[260px] space-y-3 p-5 font-mono text-sm leading-6 text-slate-700 dark:text-slate-200">
+          {lines.map((line) => (
+            <div key={line} className="flex gap-2">
+              <span className="text-emerald-500 dark:text-emerald-400">{">"}</span>
+              <span>{line}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   const completed = currentLine >= lines.length;
 
@@ -76,9 +106,12 @@ export function HeroSection({ t }: HeroProps) {
 
   return (
     <section className="relative overflow-hidden rounded-3xl px-6 py-16 sm:px-10">
-      <img
+      <Image
         src="/hero/abstract-flow.png"
         alt=""
+        fill
+        preload
+        sizes="(max-width: 1152px) 100vw, 1152px"
         className="hero-drift pointer-events-none absolute inset-0 h-full w-full object-cover object-[60%_50%] opacity-70 dark:opacity-35"
       />
 
