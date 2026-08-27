@@ -80,6 +80,12 @@ const en = {
     },
   },
 
+  accessibility: {
+    backToTop: "Back to top",
+    toggleMenu: "Toggle menu",
+    toggleTheme: "Toggle theme",
+  },
+
   hero: {
     badge: "For local service businesses",
     headline:
@@ -419,6 +425,12 @@ const fr: TContent = {
       light: "Clair",
       dark: "Sombre",
     },
+  },
+
+  accessibility: {
+    backToTop: "Retour en haut",
+    toggleMenu: "Ouvrir ou fermer le menu",
+    toggleTheme: "Changer le thème",
   },
 
   hero: {

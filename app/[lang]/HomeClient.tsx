@@ -44,7 +44,7 @@ function ThemeToggle({ t }: { t: TContent }) {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className="inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full border border-slate-300/60 bg-slate-100/70 px-3 text-xs text-slate-800 hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-800 dark:focus-visible:ring-emerald-300 dark:focus-visible:ring-offset-slate-950"
-      aria-label="Toggle theme"
+      aria-label={t.accessibility.toggleTheme}
     >
       {isDark ? `🌙 ${t.nav.themeToggle.dark}` : `☀️ ${t.nav.themeToggle.light}`}
     </button>
@@ -78,7 +78,7 @@ export default function HomeClient({
             <Link
               href={`/${lang}`}
               className="flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-emerald-300 dark:focus-visible:ring-offset-slate-950"
-              aria-label="Back to top"
+              aria-label={t.accessibility.backToTop}
             >
               {/*Logo placeholder*/}
               <div className="h-9 w-9 min-h-9 min-w-9 shrink-0 rounded-full bg-gradient-to-tr from-emerald-400 via-sky-400 to-indigo-500" />
@@ -154,7 +154,7 @@ export default function HomeClient({
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-100/70 text-sm text-slate-800 hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-800 dark:focus-visible:ring-emerald-300 dark:focus-visible:ring-offset-slate-950 md:hidden"
-              aria-label="Toggle menu"
+              aria-label={t.accessibility.toggleMenu}
               aria-expanded={mobileOpen}
             >
               ☰

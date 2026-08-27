@@ -230,6 +230,8 @@ const mediaRenderers: Record<WorkMediaType, (t: TContent) => ReactNode> = {
 };
 
 type WorkCardProps = {
+  projectId: WorkProjectId;
+  hasExtendedCaseStudy: boolean;
   title: string;
   desc: string;
   meta: string;
@@ -252,6 +254,8 @@ type WorkCardProps = {
 };
 
 function WorkCard({
+  projectId,
+  hasExtendedCaseStudy,
   title,
   desc,
   meta,
@@ -264,11 +268,24 @@ function WorkCard({
   collapseLabel,
   labels,
 }: WorkCardProps) {
+  const triggerId = `work-${projectId}-trigger`;
+  const mobileDetailsId = `work-${projectId}-details-mobile`;
+  const desktopDetailsId = `work-${projectId}-details-desktop`;
+  const extendedDetailsId = projectId;
+  const controlledRegions = [
+    mobileDetailsId,
+    desktopDetailsId,
+    ...(hasExtendedCaseStudy ? [extendedDetailsId] : []),
+  ].join(" ");
+
   return (
     <article className="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm transition dark:border-slate-800 dark:bg-slate-900/30">
       <button
+        id={triggerId}
         type="button"
         onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={controlledRegions}
         className="flex w-full flex-col gap-4 rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-emerald-300 dark:focus-visible:ring-offset-slate-950"
       >
         {media}
@@ -292,7 +309,11 @@ function WorkCard({
         </div>
       </button>
       {isOpen && (
-        <div className="mt-5 space-y-4 border-t border-slate-200 pt-4 text-sm dark:border-slate-800 md:hidden fade-up-soft">
+        <div
+          id={mobileDetailsId}
+          aria-labelledby={triggerId}
+          className="mt-5 space-y-4 border-t border-slate-200 pt-4 text-sm dark:border-slate-800 md:hidden fade-up-soft"
+        >
           <div>
             <p className="text-sm font-semibold text-slate-900 dark:text-white">
               {labels.problem}
@@ -328,11 +349,22 @@ function WorkCard({
 type ExtendedCaseStudyProps = {
   t: TContent;
   onClose: () => void;
+  regionId: string;
+  labelledBy: string;
 };
 
-function CryoAirCaseStudy({ t, onClose }: ExtendedCaseStudyProps) {
+function CryoAirCaseStudy({
+  t,
+  onClose,
+  regionId,
+  labelledBy,
+}: ExtendedCaseStudyProps) {
   return (
-    <section id="cryoair" className="max-w-3xl space-y-8">
+    <section
+      id={regionId}
+      aria-labelledby={labelledBy}
+      className="max-w-3xl space-y-8"
+    >
       <h2 className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">
         {t.work.cryoair.caseTitle}
       </h2>
@@ -454,6 +486,8 @@ export function WorkSection({ t }: WorkSectionProps) {
     return (
       <WorkCard
         key={project.id}
+        projectId={project.id}
+        hasExtendedCaseStudy={project.hasExtendedCaseStudy}
         title={content.title}
         desc={content.desc}
         meta={content.meta}
@@ -517,7 +551,11 @@ export function WorkSection({ t }: WorkSectionProps) {
           )}
 
           {activeWorkItem && (
-            <div className="mt-10 rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 hidden md:block fade-up-soft">
+            <div
+              id={`work-${activeCaseStudy}-details-desktop`}
+              aria-labelledby={`work-${activeCaseStudy}-trigger`}
+              className="mt-10 rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 hidden md:block fade-up-soft"
+            >
 
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
@@ -574,10 +612,14 @@ export function WorkSection({ t }: WorkSectionProps) {
         </div>
       </section>
 
-      {renderExtendedCaseStudy?.({
-        t,
-        onClose: () => setActiveCaseStudy(null),
-      })}
+      {renderExtendedCaseStudy &&
+        activeCaseStudy &&
+        renderExtendedCaseStudy({
+          t,
+          onClose: () => setActiveCaseStudy(null),
+          regionId: activeCaseStudy,
+          labelledBy: `work-${activeCaseStudy}-trigger`,
+        })}
     </>
   );
 }

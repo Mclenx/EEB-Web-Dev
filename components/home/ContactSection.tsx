@@ -1,19 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { TContent } from "@/app/lib/content";
 
 export function ContactSection({ t }: { t: TContent }) {
+  const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [formState, setFormState] = useState<{
     status: "idle" | "sending" | "sent" | "error";
     message?: string;
   }>({ status: "idle" });
 
+  useEffect(() => {
+    return () => {
+      if (resetTimeoutRef.current) clearTimeout(resetTimeoutRef.current);
+    };
+  }, []);
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (formState.status === "sending") return;
+
+    if (resetTimeoutRef.current) {
+      clearTimeout(resetTimeoutRef.current);
+      resetTimeoutRef.current = null;
+    }
 
     const form = e.currentTarget;
     setFormState({ status: "sending", message: t.contact.sending });
@@ -32,9 +44,11 @@ export function ContactSection({ t }: { t: TContent }) {
       }
 
       setFormState({ status: "sent", message: t.contact.sent });
-      setTimeout(() => setFormState({ status: "idle" }), 4000);
+      resetTimeoutRef.current = setTimeout(() => {
+        resetTimeoutRef.current = null;
+        setFormState({ status: "idle" });
+      }, 4000);
       form.reset();
-      (document.activeElement as HTMLElement | null)?.blur();
     } catch (err) {
       const msg =
         err instanceof Error && err.message
