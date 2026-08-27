@@ -69,7 +69,7 @@ function ServiceListItem({
                 onClick={() => setActiveService(id)}
                 aria-expanded={isActive}
                 className={[
-                    "group relative w-full overflow-hidden rounded-2xl border px-4 py-4 text-left transition-all duration-300",
+                    "group relative w-full overflow-hidden rounded-2xl border px-4 py-4 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-emerald-300 dark:focus-visible:ring-offset-slate-950",
                     isActive
                         ? "border-slate-200 bg-white text-slate-950 shadow-[0_20px_45px_-20px_rgba(15,23,42,0.35)] dark:border-slate-200 dark:bg-white dark:text-slate-950"
                         : "border-slate-200 bg-white/[0.75] text-slate-900 hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-slate-900/50 dark:text-white dark:hover:border-slate-700 dark:hover:bg-slate-900/80",

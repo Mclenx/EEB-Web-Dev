@@ -54,7 +54,7 @@ export function ProductsSection({ t, lang }: ProductsSectionProps) {
             <div className="mt-auto flex items-center justify-between gap-3">
               <Link
                 href={`/${lang}/products/kit/website-system-v1`}
-                className="inline-flex items-center rounded-full bg-emerald-400 px-4 py-1.5 text-sm font-medium text-slate-900 shadow transition hover:bg-emerald-300"
+                className="inline-flex items-center rounded-full bg-emerald-400 px-4 py-1.5 text-sm font-medium text-slate-900 shadow transition hover:bg-emerald-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-emerald-300 dark:focus-visible:ring-offset-slate-950"
               >
                 {t.products.kitV1.cta}
               </Link>

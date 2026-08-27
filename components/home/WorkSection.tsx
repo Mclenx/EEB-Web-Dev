@@ -267,7 +267,7 @@ function WorkCard({
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full flex-col gap-4 text-left"
+        className="flex w-full flex-col gap-4 rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-emerald-300 dark:focus-visible:ring-offset-slate-950"
       >
         {media}
 
@@ -412,7 +412,7 @@ function CryoAirCaseStudy({ t, onClose }: ExtendedCaseStudyProps) {
         <button
           type="button"
           onClick={onClose}
-          className="text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+          className="rounded-sm text-xs text-slate-500 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-slate-400 dark:hover:text-slate-200 dark:focus-visible:ring-emerald-300 dark:focus-visible:ring-offset-slate-950"
         >
           {t.work.cryoair.close}
         </button>
@@ -531,7 +531,7 @@ export function WorkSection({ t }: WorkSectionProps) {
                 <button
                   type="button"
                   onClick={() => setActiveCaseStudy(null)}
-                  className="text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                  className="rounded-sm text-xs text-slate-500 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-slate-400 dark:hover:text-slate-200 dark:focus-visible:ring-emerald-300 dark:focus-visible:ring-offset-slate-950"
                 >
                   {t.work.collapseLabel}
                 </button>
